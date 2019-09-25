@@ -7,6 +7,7 @@ export default class TaskItem extends Component {
     titleValue: "",
     startTimeValue: "",
     endTimeValue: "",
+    timeSlices: 0,
     scoresArr: [
       { label: "-1", value: -1 },
       { label: "-0.5", value: -0.5 },
@@ -17,27 +18,50 @@ export default class TaskItem extends Component {
     score: []
   }
   onTitleChange = (val) => {
-    console.log(val);
     this.setState({
       titleValue: val
     });
   }
   onStartTimeChange = (val) => {
-    console.log(val);
     this.setState({
       startTimeValue: val
+    }, () => {
+      this.calculateTimeUnit();
     });
+
   }
   onEndTimeChange = (val) => {
     this.setState({
       endTimeValue: val
+    }, () => {
+      this.calculateTimeUnit();
     });
   }
   onScoreChange = (val) => {
-    console.log('onScoreChange', val);
     this.setState({
       score: val
+    }, () => {
+      this.calculateScore(Number(val));
     });
+  }
+  calculateTimeUnit = () => {
+    console.log('calculateTimeUnit', this.state.startTimeValue);
+    if (this.state.startTimeValue && this.state.endTimeValue) {
+      const timeD = (new Date(this.state.endTimeValue).getTime() - new Date(this.state.startTimeValue).getTime()) / 1000;
+      console.log(timeD);
+      const slices = Math.round(timeD / 1800);
+      console.log(slices);
+      this.setState({
+        timeSlices: slices
+      });
+    }
+  }
+  calculateScore = (score) => {
+    this.calculateTimeUnit();
+    if (this.state.timeSlices > 0) {
+      const totalScore = score * this.state.timeSlices;
+      this.props.onScoreChange(totalScore);
+    }
   }
   render() {
     return (
