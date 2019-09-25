@@ -4,6 +4,7 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Provider } from '@ant-design/react-native';
 
 import AppNavigator from './navigation/AppNavigator';
 
@@ -20,10 +21,12 @@ export default function App(props) {
     );
   } else {
     return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
-      </View>
+      <Provider>
+        <View style={styles.container}>
+          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          <AppNavigator />
+        </View>
+      </Provider>
     );
   }
 }
@@ -41,6 +44,16 @@ async function loadResourcesAsync() {
       // remove this if you are not using it in your app
       'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
     }),
+    Font.loadAsync(
+      'antoutline',
+      // eslint-disable-next-line
+      require('@ant-design/icons-react-native/fonts/antoutline.ttf')
+    ),
+    Font.loadAsync(
+      'antfill',
+      // eslint-disable-next-line
+      require('@ant-design/icons-react-native/fonts/antfill.ttf')
+    )
   ]);
 }
 

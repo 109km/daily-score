@@ -6,6 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import MyScreen from '../screens/MyScreen';
+import TodayScreen from '../screens/TodayScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -67,10 +68,28 @@ MyStack.navigationOptions = {
 
 MyStack.path = '';
 
+const TodayStack = createStackNavigator(
+  {
+    Settings: TodayScreen,
+  },
+  config
+);
+
+TodayStack.navigationOptions = {
+  tabBarLabel: '今日',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-add-circle' : 'md-add-circle'} />
+  ),
+};
+
+TodayStack.path = '';
+
+
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
   MyStack,
+  TodayStack
 });
 
 tabNavigator.path = '';
