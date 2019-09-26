@@ -78,8 +78,12 @@ const TodayStack = createStackNavigator(
 TodayStack.navigationOptions = {
   tabBarLabel: '今日',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-add-circle' : 'md-add-circle'} />
-  ),
+    <TabBarIcon
+      size={48}
+      style={{ marginTop: -30, backgroundColor: "#fff" }}
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-add-circle' : 'md-add-circle'} />
+  )
 };
 
 TodayStack.path = '';
@@ -87,9 +91,9 @@ TodayStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
+  TodayStack,
   LinksStack,
   MyStack,
-  TodayStack
 });
 
 tabNavigator.path = '';
