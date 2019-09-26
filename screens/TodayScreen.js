@@ -19,7 +19,7 @@ export default class TodayScreen extends Component {
       <ScrollView style={styles.container}>
         <TaskItem onScoreChange={this.onScoreChange} />
         <TaskItem onScoreChange={this.onScoreChange} />
-        <Text>总分{this.state.totalScore}</Text>
+        <Text style={styles.scoreContainer}>总分{this.state.totalScore}</Text>
       </ScrollView>
     );
   }
@@ -35,4 +35,9 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     backgroundColor: '#fff',
   },
+  scoreContainer: {
+    fontSize: 24,
+    marginTop: 10,
+    textAlign: 'center'
+  }
 });

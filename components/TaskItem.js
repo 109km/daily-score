@@ -5,6 +5,7 @@ import { InputItem, DatePicker, List, Picker } from '@ant-design/react-native';
 export default class TaskItem extends Component {
   state = {
     titleValue: "",
+    defaultTimeValue: "",
     startTimeValue: "",
     endTimeValue: "",
     timeSlices: 0,
@@ -28,7 +29,6 @@ export default class TaskItem extends Component {
     }, () => {
       this.calculateTimeUnit();
     });
-
   }
   onEndTimeChange = (val) => {
     this.setState({
@@ -44,13 +44,17 @@ export default class TaskItem extends Component {
       this.calculateScore(Number(val));
     });
   }
+  onDateClick = (isOpen) => {
+
+    if (isOpen) {
+      this.findCurrentFiveMinutes();
+    }
+
+  }
   calculateTimeUnit = () => {
-    console.log('calculateTimeUnit', this.state.startTimeValue);
     if (this.state.startTimeValue && this.state.endTimeValue) {
       const timeD = (new Date(this.state.endTimeValue).getTime() - new Date(this.state.startTimeValue).getTime()) / 1000;
-      console.log(timeD);
       const slices = Math.round(timeD / 1800);
-      console.log(slices);
       this.setState({
         timeSlices: slices
       });
@@ -62,6 +66,27 @@ export default class TaskItem extends Component {
       const totalScore = score * this.state.timeSlices;
       this.props.onScoreChange(totalScore);
     }
+  }
+  findCurrentFiveMinutes = () => {
+    const d = new Date();
+    const minute = d.getMinutes();
+    let hours = d.getHours();
+    let fiveMin = Math.round(minute / 5) * 5;
+    console.log(fiveMin);
+    if (fiveMin > 55) {
+      d.setMinutes(0);
+      fiveMin = 0;
+      hours = hours + 1;
+      if (hours == 24) {
+        hours = 0;
+      }
+      d.setHours(hours);
+    }
+    d.setMinutes(fiveMin);
+
+    this.setState({
+      defaultTimeValue: d
+    });
   }
   render() {
     return (
@@ -79,9 +104,10 @@ export default class TaskItem extends Component {
           <DatePicker
             value={this.state.startTimeValue}
             mode="time"
-            defaultDate={new Date()}
+            defaultDate={this.state.defaultTimeValue}
             minuteStep={5}
             onChange={this.onStartTimeChange}
+            onVisibleChange={this.onDateClick}
             format="HH:mm"
           >
             <List.Item arrow="horizontal">开始时间</List.Item>
@@ -91,9 +117,10 @@ export default class TaskItem extends Component {
           <DatePicker
             value={this.state.endTimeValue}
             mode="time"
-            defaultDate={new Date()}
+            defaultDate={this.state.defaultTimeValue}
             minuteStep={5}
             onChange={this.onEndTimeChange}
+            onVisibleChange={this.onDateClick}
             format="HH:mm"
           >
             <List.Item arrow="horizontal">结束时间</List.Item>
