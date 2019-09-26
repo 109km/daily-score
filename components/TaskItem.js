@@ -72,7 +72,6 @@ export default class TaskItem extends Component {
     const minute = d.getMinutes();
     let hours = d.getHours();
     let fiveMin = Math.round(minute / 5) * 5;
-    console.log(fiveMin);
     if (fiveMin > 55) {
       d.setMinutes(0);
       fiveMin = 0;
