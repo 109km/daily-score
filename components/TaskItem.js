@@ -10,11 +10,11 @@ export default class TaskItem extends Component {
     endTimeValue: "",
     timeSlices: 0,
     scoresArr: [
-      { label: "-2", value: -2 },
-      { label: "-1", value: -1 },
-      { label: "0", value: 0 },
-      { label: "1", value: 1 },
-      { label: "2", value: 2 }
+      { label: "-2(对内在有伤害)", value: -2 },
+      { label: "-1(对外在有伤害)", value: -1 },
+      { label: "0(无变化)", value: 0 },
+      { label: "1(对外在有成长)", value: 1 },
+      { label: "2(对内在有成长)", value: 2 }
     ],
     score: []
   }
