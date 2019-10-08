@@ -1,11 +1,12 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "eject": "expo eject",
+    "start": "cross-env expo start",
+    "debug": "cross-env EXPO_DEBUG=true expo start",
+    "android": "cross-env expo start --android",
+    "ios": "cross-env expo start --ios",
+    "web": "cross-env expo start --web",
+    "eject": "cross-env expo eject",
     "test": "jest --watchAll"
   },
   "jest": {
