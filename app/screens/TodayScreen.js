@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet } from 'react-native';
-import { InputItem, DatePicker, List, Picker } from '@ant-design/react-native';
+// import { InputItem, DatePicker, List, Picker } from '@ant-design/react-native';
 import TaskItem from '../components/TaskItem';
 
 
