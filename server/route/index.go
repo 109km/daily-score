@@ -1,3 +1,3 @@
 package route
 
-var RouterName = "123123"
+var RouterName string = "route.index"
