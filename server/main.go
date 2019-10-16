@@ -1,10 +1,14 @@
 package main
 
+import (
+   "server/route"
+)
+
 var a string
 
 func main() {
    a = "G"
-   print(a)
+   print(route.RouterName)
    f1()
 }
 
