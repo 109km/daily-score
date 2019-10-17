@@ -1,14 +1,15 @@
 package main
 
 import (
+	_ "server/routers"
+
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
-	_ "server/routers"
 )
 
 func init() {
-	
+	print("init in main")
 }
 
 func main() {

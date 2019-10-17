@@ -5,9 +5,9 @@ import (
 )
 
 type User struct {
-	Id     int
-	Nickname    string
-	Mobile string
+	Id       int
+	Nickname string
+	Mobile   string
 	Password string
 }
 
@@ -18,4 +18,6 @@ func init() {
 
 	// 注册model
 	orm.RegisterModel(new(User))
+
+	print("init in models.go")
 }
