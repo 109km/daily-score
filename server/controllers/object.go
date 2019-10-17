@@ -1,9 +1,8 @@
 package controllers
 
 import (
-	"daily-score-server/models"
+	"server/models"
 	"encoding/json"
-
 	"github.com/astaxie/beego"
 )
 

@@ -4,7 +4,7 @@ import (
 	"github.com/astaxie/beego"
 )
 
-// Operations about Users
+// Operations about Index
 type IndexController struct {
 	beego.Controller
 }
