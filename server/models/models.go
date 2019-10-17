@@ -12,6 +12,10 @@ type User struct {
 }
 
 func init() {
-	// 需要在init中注册定义的model
+	// Register db
+	orm.RegisterDriver("mysql", orm.DRMySQL)
+	orm.RegisterDataBase("default", "mysql", "root:s09070825!@tcp(127.0.0.1:3306)/daily_score?charset=utf8")
+
+	// 注册model
 	orm.RegisterModel(new(User))
 }

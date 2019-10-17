@@ -8,9 +8,7 @@ import (
 )
 
 func init() {
-	// Register db
-	orm.RegisterDriver("mysql", orm.DRMySQL)
-	orm.RegisterDataBase("default", "mysql", "root:s09070825!@tcp(127.0.0.1:3306)/daily_score?charset=utf8")
+	
 }
 
 func main() {

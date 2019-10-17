@@ -6,18 +6,20 @@ import (
 )
 
 var (
-	UserList map[int]*User
+	UserList []*User
+	opManager orm.Ormer
 )
 
+
 func init() {
-	UserList = make(map[int]*User)
+	opManager = orm.NewOrm()
 }
 
 
 func GetUser(uid int) (user User, err error) {
-	o := orm.NewOrm()
+	
 	resUser := User{Id: uid}
-	resErr := o.Read(&resUser)
+	resErr := opManager.Read(&resUser)
 
 	if resErr == orm.ErrNoRows {
 		return resUser, errors.New("查询不到")
@@ -30,6 +32,8 @@ func GetUser(uid int) (user User, err error) {
 	return resUser, errors.New("User not exists")
 }
 
-func GetAllUsers() map[int]*User {	
+func GetAllUsers() []*User {
+	qs := opManager.QueryTable("user")
+	qs.All(&UserList)
 	return UserList
 }
