@@ -7,10 +7,6 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
-func init() {
-	print("init in main")
-}
-
 func main() {
 	if beego.BConfig.RunMode == "dev" {
 		orm.Debug = true

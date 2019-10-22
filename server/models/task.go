@@ -1,33 +1,33 @@
 package models
 
-var (
-	Tasks [10]Task
+import (
+	"errors"
+
+	"github.com/astaxie/beego/orm"
 )
 
-type Task struct {
-	id   		int64
-	content int
-	score_unit int
-	total_score int
-	start_time string
-	end_time string
-	date string
+var (
+	TaskList []*Task
+)
+
+func GetTask(id int) (task Task, err error) {
+
+	res := Task{Id: id}
+	resErr := OrmInstance.Read(&res)
+
+	if resErr == orm.ErrNoRows {
+		return res, errors.New("查询不到")
+	} else if resErr == orm.ErrMissPK {
+		return res, errors.New("找不到主键")
+	} else {
+		return res, nil
+	}
+
+	return res, errors.New("Task not exists")
 }
 
-func init() {
-	// for i:= 0; i < 10 ;i++{
-	// 	comment := "Hello"
-	// 	Tasks[i] = Task{ i, i * 10, comment}
-	// }
+func GetAllTasks() []*Task {
+	qs := OrmInstance.QueryTable("task")
+	qs.All(&TaskList)
+	return TaskList
 }
-
-func GetAllTasks() []Task {
-	var slices []Task = Tasks[3:6]
-	return slices
-}
-
-func AddTask(task Task) {
-	
-}
-
-

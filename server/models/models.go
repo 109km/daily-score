@@ -5,11 +5,24 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+var (
+	OrmInstance orm.Ormer
+)
+
 type User struct {
 	Id       int
 	Nickname string
 	Mobile   string
 	Password string
+}
+
+type Task struct {
+	Id         int
+	Title      string
+	UnitScore  int
+	TotalScore int
+	StartTime  string
+	EndTime    string
 }
 
 func init() {
@@ -18,7 +31,7 @@ func init() {
 	orm.RegisterDataBase("default", "mysql", "root:s09070825!@tcp(127.0.0.1:3306)/daily_score?charset=utf8")
 
 	// 注册model
-	orm.RegisterModel(new(User))
+	orm.RegisterModel(new(User), new(Task))
 
-	print("init in models.go")
+	OrmInstance = orm.NewOrm()
 }

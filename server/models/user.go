@@ -7,33 +7,27 @@ import (
 )
 
 var (
-	UserList  []*User
-	opManager orm.Ormer
+	UserList []*User
 )
 
-func init() {
-	opManager = orm.NewOrm()
-	print("init in user.go")
-}
+func GetUser(id int) (user User, err error) {
 
-func GetUser(uid int) (user User, err error) {
-
-	resUser := User{Id: uid}
-	resErr := opManager.Read(&resUser)
+	res := User{Id: id}
+	resErr := OrmInstance.Read(&res)
 
 	if resErr == orm.ErrNoRows {
-		return resUser, errors.New("查询不到")
+		return res, errors.New("查询不到")
 	} else if resErr == orm.ErrMissPK {
-		return resUser, errors.New("找不到主键")
+		return res, errors.New("找不到主键")
 	} else {
-		return resUser, nil
+		return res, nil
 	}
 
-	return resUser, errors.New("User not exists")
+	return res, errors.New("User not exists")
 }
 
 func GetAllUsers() []*User {
-	qs := opManager.QueryTable("user")
+	qs := OrmInstance.QueryTable("user")
 	qs.All(&UserList)
 	return UserList
 }

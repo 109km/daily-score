@@ -15,6 +15,10 @@ func init() {
 			beego.NSRouter("/", &controllers.UserController{}, "get:GetAll"),
 			beego.NSRouter("/:uid", &controllers.UserController{}, "get:Get"),
 		),
+		beego.NSNamespace("/task",
+			beego.NSRouter("/", &controllers.TaskController{}, "get:GetAll"),
+			beego.NSRouter("/:tid", &controllers.TaskController{}, "get:Get"),
+		),
 	)
 	beego.AddNamespace(ns)
 }

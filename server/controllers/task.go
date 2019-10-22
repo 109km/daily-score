@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"server/models"
+	"strconv"
 
 	"github.com/astaxie/beego"
 )
@@ -10,13 +11,22 @@ import (
 type TaskController struct {
 	beego.Controller
 }
-// @Title GetAll
-// @Description get all objects
-// @Success 200 {object} models.Object
-// @Failure 403 :objectId is empty
-// @router / [get]
+
 func (this *TaskController) GetAll() {
 	tasks := models.GetAllTasks()
 	this.Data["json"] = tasks
+	this.ServeJSON()
+}
+
+func (this *TaskController) Get() {
+	id, _ := strconv.Atoi(this.GetString(":tid"))
+	if id > 0 {
+		task, err := models.GetTask(id)
+		if err != nil {
+			this.Data["json"] = err.Error()
+		} else {
+			this.Data["json"] = task
+		}
+	}
 	this.ServeJSON()
 }
