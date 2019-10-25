@@ -1,33 +1,35 @@
 package models
 
-import (
-	"errors"
-
-	"github.com/astaxie/beego/orm"
-)
-
 var (
 	UserList []*User
 )
 
-func GetUser(id int) (user User, err error) {
-
+// Get single `user` by id
+func GetUserById(id int) (user User, err error) {
 	res := User{Id: id}
 	resErr := OrmInstance.Read(&res)
 
-	if resErr == orm.ErrNoRows {
-		return res, errors.New("查询不到")
-	} else if resErr == orm.ErrMissPK {
-		return res, errors.New("找不到主键")
-	} else {
-		return res, nil
-	}
-
-	return res, errors.New("User not exists")
+	errorMsg := ProceedSearchError(resErr)
+	return res, errorMsg
 }
 
+// Get all users
 func GetAllUsers() []*User {
 	qs := OrmInstance.QueryTable("user")
 	qs.All(&UserList)
 	return UserList
+}
+
+func AddOneUser(mobile string, password string, nickname string) (uid int64, err error) {
+	var user User
+	user.Mobile = mobile
+	user.Password = password
+	user.Nickname = nickname
+
+	id, err := OrmInstance.Insert(&user)
+	if err == nil {
+		return id, nil
+	}
+	return 0, err
+
 }

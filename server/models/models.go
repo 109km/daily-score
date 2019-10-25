@@ -1,6 +1,8 @@
 package models
 
 import (
+	"errors"
+
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -10,19 +12,19 @@ var (
 )
 
 type User struct {
-	Id       int
-	Nickname string
-	Mobile   string
-	Password string
+	Id       int    `json:"id"`
+	Nickname string `json:"nickname"`
+	Mobile   string `json:"mobile"`
+	Password string `json:"password"`
 }
 
 type Task struct {
-	Id         int
-	Title      string
-	UnitScore  int
-	TotalScore int
-	StartTime  string
-	EndTime    string
+	Id         int    `json:"id"`
+	Title      string `json:"title"`
+	UnitScore  int    `json:"unit_score"`
+	TotalScore int    `json:"total_score"`
+	StartTime  string `json:"start_time"`
+	EndTime    string `json:"end_time"`
 }
 
 func init() {
@@ -34,4 +36,14 @@ func init() {
 	orm.RegisterModel(new(User), new(Task))
 
 	OrmInstance = orm.NewOrm()
+}
+
+func ProceedSearchError(resErr error) (err error) {
+	if resErr == orm.ErrNoRows {
+		return errors.New("查询不到")
+	} else if resErr == orm.ErrMissPK {
+		return errors.New("找不到主键")
+	} else {
+		return nil
+	}
 }
