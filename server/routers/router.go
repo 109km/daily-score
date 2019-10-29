@@ -20,6 +20,10 @@ func init() {
 			beego.NSRouter("/", &controllers.TaskController{}, "get:GetAll"),
 			beego.NSRouter("/:tid", &controllers.TaskController{}, "get:Get"),
 		),
+		beego.NSNamespace("/ad",
+			beego.NSRouter("/", &controllers.AdController{}, "get:GetAll"),
+			beego.NSRouter("/add", &controllers.AdController{}, "post:Add"),
+		),
 	)
 	beego.AddNamespace(ns)
 }

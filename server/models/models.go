@@ -27,13 +27,22 @@ type Task struct {
 	EndTime    string `json:"end_time"`
 }
 
+type Ad struct {
+	Id         int    `json:"id"`
+	Q1      string `json:"q1"`
+	Q2  string    `json:"q2"`
+	Q3 string    `json:"q3"`
+	Name string `json:"name"`
+	Phone string `json:"phone"`
+}
+
 func init() {
 	// Register db
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	orm.RegisterDataBase("default", "mysql", "root:s09070825!@tcp(127.0.0.1:3306)/daily_score?charset=utf8")
 
 	// 注册model
-	orm.RegisterModel(new(User), new(Task))
+	orm.RegisterModel(new(User), new(Task), new(Ad))
 
 	OrmInstance = orm.NewOrm()
 }

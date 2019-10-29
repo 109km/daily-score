@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0,shrink-to-fit=no" />
+  <meta name="theme-color" content="#000000" />
+  <title>Main</title>
+  <link rel="stylesheet" href="//ad-1251636704.cos.ap-beijing.myqcloud.com/iqiyi-1029/global.css">
+  <link rel="stylesheet" href="//res.wx.qq.com/open/libs/weui/2.0.1/weui.min.css">
+  <style>
+    body {
+      font: 14px/1.5 "微软雅黑", tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;
+    }
+
+    img {
+      display: block;
+    }
+
+    .form {
+      padding: 10px 30px;
+    }
+
+    .question {
+      margin-bottom: 20px;
+    }
+
+    .form h2 {
+      font-size: 15px;
+      color: #e30b21;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .form h2 span {
+      font-weight: normal;
+      font-size: 12px;
+      color: #999;
+    }
+
+
+    .choices {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .choices .item {
+      flex-shrink: 0;
+      width: 50%;
+      margin-bottom: 10px;
+      line-height: 21px;
+      font-size: 15px;
+    }
+
+    .choices .item input[type="checkbox"] {
+      vertical-align: middle;
+      outline: none;
+      border: none;
+    }
+
+    .user {
+      margin: 10px 0;
+    }
+
+    .user input {
+      display: block;
+      width: 300px;
+      text-indent: 10px;
+      line-height: 32px;
+      font-size: 14px;
+      margin: 0 auto 10px auto;
+      background: #e9e9e9;
+      outline: none;
+      border: none;
+      color: #333;
+    }
+
+    .btn {
+      display: block;
+      width: 300px;
+      margin: 20px auto 10px auto;
+      line-height: 42px;
+      font-size: 14px;
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+      background-color: #e30b21;
+    }
+  </style>
+  <script>
+    (function (d, s) { var tpct = d.createElement(s); tpct.src = "//static.iqiyi.com/js/common/tpct.min.js"; var es = d.getElementsByTagName(s)[0]; es.parentNode.insertBefore(tpct, es); })(document, "script")
+  </script>
+</head>
+
+<body>
+  <div name="root" class="container">
+
+    <img src="//ad-1251636704.cos.ap-beijing.myqcloud.com/iqiyi-1029/pic_01.jpg" alt="" />
+    <img src="//ad-1251636704.cos.ap-beijing.myqcloud.com/iqiyi-1029/pic_02.jpg" alt="" />
+    <img src="//ad-1251636704.cos.ap-beijing.myqcloud.com/iqiyi-1029/pic_03.jpg" alt="" />
+    <img src="//ad-1251636704.cos.ap-beijing.myqcloud.com/iqiyi-1029/pic_04.jpg" alt="" />
+    <form class="form">
+
+      <div class="question">
+        <h2>您有哪些癣病症状？<span>(多选)</span></h2>
+        <div class="choices">
+          <label class="item">
+            <input type="checkbox" name="q1" value="体癣"> 体癣
+          </label>
+          <label class="item">
+            <input type="checkbox" name="q1" value="手癣"> 手癣
+          </label>
+          <label class="item">
+            <input type="checkbox" name="q1" value="足癣"> 足癣
+          </label>
+          <label class="item">
+            <input type="checkbox" name="q1" value="其他部位"> 其他部位
+          </label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h2>您的癣症严重吗？<span>(单选)</span></h2>
+        <div class="choices">
+          <label class="item">
+            <input type="radio" name="q2" value="严重"> 严重
+          </label>
+          <label class="item">
+            <input type="radio" name="q2" value="一般"> 一般
+          </label>
+          <label class="item">
+            <input type="radio" name="q2" value="轻微"> 轻微
+          </label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h2>您出现癣病症状多久了？<span>(单选)</span></h2>
+        <div class="choices">
+          <label class="item">
+            <input type="radio" name="q3" value="1年以内"> 1年以内
+          </label>
+          <label class="item">
+            <input type="radio" name="q3" value="1-3年"> 1-3年
+          </label>
+          <label class="item">
+            <input type="radio" name="q3" value="3-5年"> 3-5年
+          </label>
+          <label class="item">
+            <input type="radio" name="q3" value="5年以上"> 5年以上
+          </label>
+        </div>
+      </div>
+      <div class="user">
+        <input type="text" id="name" name="name" placeholder="姓名" maxlength="32" />
+        <input type="text" id="phone" name="phone" placeholder="电话" maxlength="11" />
+        <a class="btn" href="javascript:;">免费获取治疗方案</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="//ad-1251636704.cos.ap-beijing.myqcloud.com/iqiyi-1029/scale.js"></script>
+  <script src="//ad-1251636704.cos.ap-beijing.myqcloud.com/iqiyi-1029/global.js"></script>
+  <script src="//ad-1251636704.cos.ap-beijing.myqcloud.com/iqiyi-1029/zepto.min.js"></script>
+  <script type="text/javascript" src="//res.wx.qq.com/open/libs/weuijs/1.2.1/weui.min.js"></script>
+  <script>
+      (function () {
+        var form = $('.form');
+        function checkIsChoosed() {
+          var questions = $('.question');
+          var isFilledCount = 0;
+          questions.each(function (index1, question) {
+            var inputs = $(question).find('input');
+            var isThisQuestionFilled = false;
+            inputs.each(function (index2, input) {
+              var $input = $(input);
+              var inputType = $input.attr("type");
+              if ($input.prop("checked") === true) {
+                isFilledCount = isFilledCount + 1;
+              }
+            });
+          });
+
+          console.log(isFilledCount);
+          return isFilledCount === 3 ? true : false;
+        }
+
+        function isMobile(mobile) {
+          return /^1[3456789][0-9]{9}$/.test(mobile);
+        }
+
+        function checkNameAndPhone() {
+          var name = $.trim($('#name').val());
+          var phone = $.trim($('#phone').val());
+
+          if (name.length === 0) {
+            weui.alert("请填写姓名");
+            return false;
+          }
+          if (phone.length === 0 || !isMobile(phone)) {
+            weui.alert("请填写正确的手机号");
+            return false;
+          }
+          return true;
+        }
+
+        $('.btn').click(function (e) {
+          e.preventDefault();
+
+
+          if (checkIsChoosed() === false) {
+            weui.alert("选择题未答完！");
+            return;
+          }
+          if (checkNameAndPhone() === false) {
+            return;
+          }
+
+
+          var data = form.serialize();
+          $.post('http://140.143.194.171:8080/v1/ad/add/', data, function (res) {
+            if (res.uid) {
+              weui.toast('申请成功！', 3000);
+            } else {
+              console.error(res);
+            }
+          });
+        });
+
+      })()
+  </script>
+</body>
+
+</html>
