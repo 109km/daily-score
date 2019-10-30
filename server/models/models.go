@@ -34,6 +34,7 @@ type Ad struct {
 	Q3 string    `json:"q3"`
 	Name string `json:"name"`
 	Phone string `json:"phone"`
+	SubmitTime string `json:"submit_time"`
 }
 
 func init() {

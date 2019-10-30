@@ -1,1 +1,7 @@
 server
+
+main
+
+*.tar.gz
+*.zip
+*.exe
