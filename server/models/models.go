@@ -29,12 +29,13 @@ type Task struct {
 
 type Ad struct {
 	Id         int    `json:"id"`
-	Q1      string `json:"q1"`
-	Q2  string    `json:"q2"`
-	Q3 string    `json:"q3"`
-	Name string `json:"name"`
-	Phone string `json:"phone"`
+	Q1         string `json:"q1"`
+	Q2         string `json:"q2"`
+	Q3         string `json:"q3"`
+	Name       string `json:"name"`
+	Phone      string `json:"phone"`
 	SubmitTime string `json:"submit_time"`
+	LogTime    string `json:"log_time"`
 }
 
 func init() {
