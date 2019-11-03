@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"server/models"
+
 	"github.com/astaxie/beego"
 )
 
@@ -16,12 +17,11 @@ func (this *AdController) GetAll() {
 
 	var ads []*models.Ad
 
-	if ( date == ""){
+	if date == "" {
 		ads = models.GetAllAds()
-	}else{
+	} else {
 		ads = models.GetAdsByDate(date)
 	}
-
 
 	this.Ctx.Output.Header("Access-Control-Allow-Origin", "*")
 	this.Ctx.Output.Header("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE")
@@ -40,7 +40,7 @@ func (this *AdController) Add() {
 	phone := this.GetString("phone")
 	name := this.GetString("name")
 
-	id, err := models.AddOneAd(q1,q2,q3,name,phone)
+	id, err := models.AddOneAd(q1, q2, q3, name, phone)
 	if err != nil {
 		this.Data["json"] = err.Error()
 	} else {

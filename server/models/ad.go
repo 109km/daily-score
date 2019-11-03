@@ -33,10 +33,14 @@ func AddOneAd(q1 []string, q2 string, q3 string, name string, phone string) (aid
 	ad.SubmitTime = date[0:10]
 	ad.LogTime = date
 
-	id, err := OrmInstance.Insert(&ad)
+	created, id, err := OrmInstance.ReadOrCreate(&ad, "Phone")
 	if err == nil {
-		return id, nil
+		if created {
+			return id, nil
+		} else {
+			return -1, nil
+		}
 	}
-	return 0, err
+	return -2, err
 
 }
