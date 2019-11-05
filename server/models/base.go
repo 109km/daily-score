@@ -12,7 +12,7 @@ var (
 )
 
 type User struct {
-	Id       int    `json:"id"`
+	Id       int64  `json:"id"`
 	Nickname string `json:"nickname"`
 	Mobile   string `json:"mobile"`
 	Password string `json:"password"`

@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"fmt"
 	"server/models"
+	"server/types"
 	"strconv"
 )
 
@@ -18,7 +18,7 @@ func (u *UserController) GetAll() {
 }
 
 func (u *UserController) Get() {
-	uid, _ := strconv.Atoi(u.GetString(":uid"))
+	uid, _ := strconv.ParseInt(u.GetString(":uid"), 10, 64)
 	if uid > 0 {
 		user, err := models.GetUserById(uid)
 		if err != nil {
@@ -37,9 +37,7 @@ func (this *UserController) Add() {
 	nickname := this.GetString("nickname")
 
 	if mobile == "" {
-		response := NewResponseData(-1, "`mobile` must not be empty.", make(DataJSON))
-		this.Data["json"] = response
-		fmt.Println(response)
+		this.ServeResponse(-1, "`mobile` must not be empty.", nil)
 	} else {
 		id, err := models.AddOneUser(mobile, password, nickname)
 		if err != nil {
@@ -53,24 +51,34 @@ func (this *UserController) Add() {
 
 func (this *UserController) Login() {
 
-	username := this.GetString("username")
-	// password := this.GetString("password")
+	mobile := this.GetString("mobile")
+	password := this.GetString("password")
 
-	userSession := this.GetSession(username)
+	userSession := this.GetSession(mobile)
+
+	resCode := 0
+	resMessage := "success"
+	resData := make(types.DataJSON)
 
 	if userSession == nil {
-		this.SetSession(username, int(1))
-		resCode := 0
-		resMessage := "success"
-		resData := make(DataJSON)
-		resData["username"] = username
-		resData["sessionId"] = int(1)
-		this.ServeResponse(resCode, resMessage, resData)
+
+		_, err := models.LoginUser(mobile, password)
+
+		if err == nil {
+			this.SetSession(mobile, int(1))
+			resData["mobile"] = mobile
+			resData["sessionId"] = int(1)
+		} else {
+			resCode = -50001
+			resMessage = err.Error()
+		}
 
 	} else {
-		this.SetSession("asta", userSession.(int)+1)
-		this.Data["num"] = userSession.(int)
+		this.SetSession(mobile, userSession.(int)+1)
+		resMessage = "still logined"
+		resData["mobile"] = mobile
+		resData["sessionId"] = userSession.(int) + 1
 	}
+	this.ServeResponse(resCode, resMessage, resData)
 
-	this.ServeJSON()
 }

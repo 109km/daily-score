@@ -1,16 +1,16 @@
 package models
 
 var (
-	UserList []*User
+	UserList      []*User
+	responseError error
 )
 
 // Get single `user` by id
-func GetUserById(id int) (user User, err error) {
-	res := User{Id: id}
-	resErr := OrmInstance.Read(&res)
-
-	errorMsg := ProceedSearchError(resErr)
-	return res, errorMsg
+func GetUserById(id int64) (user User, errorMsg error) {
+	user = User{Id: id}
+	responseError = OrmInstance.Read(&user)
+	errorMsg = ProceedSearchError(responseError)
+	return user, errorMsg
 }
 
 // Get all users
@@ -20,16 +20,32 @@ func GetAllUsers() []*User {
 	return UserList
 }
 
-func AddOneUser(mobile string, password string, nickname string) (uid int64, err error) {
+func AddOneUser(mobile string, password string, nickname string) (uid int64, errorMsg error) {
 	var user User
+	var id int64
 	user.Mobile = mobile
 	user.Password = password
 	user.Nickname = nickname
 
-	id, err := OrmInstance.Insert(&user)
-	if err == nil {
+	id, responseError = OrmInstance.Insert(&user)
+	errorMsg = ProceedSearchError(responseError)
+	if responseError == nil {
 		return id, nil
 	}
-	return 0, err
+	return -1, errorMsg
 
+}
+
+func LoginUser(mobile string, password string) (uid int64, errorMsg error) {
+	var user User
+	user.Mobile = mobile
+	user.Password = password
+
+	responseError = OrmInstance.Read(&user, "Mobile", "Password")
+	errorMsg = ProceedSearchError(responseError)
+
+	if responseError == nil {
+		return user.Id, nil
+	}
+	return -1, errorMsg
 }
