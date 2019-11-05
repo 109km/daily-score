@@ -63,7 +63,6 @@ func (this *UserController) Login() {
 	if userSession == nil {
 
 		_, err := models.LoginUser(mobile, password)
-
 		if err == nil {
 			this.SetSession(mobile, int(1))
 			resData["mobile"] = mobile
@@ -74,10 +73,10 @@ func (this *UserController) Login() {
 		}
 
 	} else {
-		this.SetSession(mobile, userSession.(int)+1)
-		resMessage = "still logined"
+		this.SetSession(mobile, userSession.(int))
+		resMessage = "not expired"
 		resData["mobile"] = mobile
-		resData["sessionId"] = userSession.(int) + 1
+		resData["sessionId"] = userSession.(int)
 	}
 	this.ServeResponse(resCode, resMessage, resData)
 
