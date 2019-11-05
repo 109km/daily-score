@@ -3,16 +3,29 @@ package main
 import (
 	_ "server/routers"
 
+	"github.com/gomodule/redigo/redis"
+
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 )
 
+var RedisConn *redis.Conn
+
 func main() {
+	// fmt.Println(beego.BConfig.RunMode)
 	if beego.BConfig.RunMode == "dev" {
 		orm.Debug = true
-		beego.BConfig.WebConfig.DirectoryIndex = true
-		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
+		// beego.BConfig.WebConfig.DirectoryIndex = true
+		// beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
 	}
+	// fmt.Println(redis.Conn)
+	beego.BConfig.WebConfig.Session.SessionOn = true
+	beego.BConfig.WebConfig.Session.SessionName = "daily_score_session_id"
+	beego.BConfig.WebConfig.Session.SessionGCMaxLifetime = 3600
+
+	// Set session provider config
+	// beego.BConfig.WebConfig.Session.SessionProvider = "redis"
+	// beego.BConfig.WebConfig.Session.SessionProviderConfig = "127.0.0.1:6379"
 
 	beego.SetStaticPath("/public", "public")
 	beego.Run()

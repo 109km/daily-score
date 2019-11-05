@@ -1,21 +1,16 @@
 package controllers
 
-import (
-	"github.com/astaxie/beego"
-)
-
 // Operations about Index
 type IndexController struct {
-	beego.Controller
+	BaseController
 }
 
 // @Title GetAll
 // @Description get index
-// @Success 200 {object} 
+// @Success 200 {object}
 // @router / [get]
 func (this *IndexController) GetAll() {
-	this.Data["json"] = map[string]string {"Hello":"world"}
-	this.ServeJSON()
+	data := make(map[string]interface{})
+	data["name"] = "hello"
+	this.ServeResponse(0, "success", data)
 }
-
-

@@ -4,13 +4,11 @@ import (
 	"fmt"
 	"server/models"
 	"strconv"
-
-	"github.com/astaxie/beego"
 )
 
 // Operations about Users
 type UserController struct {
-	beego.Controller
+	BaseController
 }
 
 func (u *UserController) GetAll() {
@@ -39,7 +37,7 @@ func (this *UserController) Add() {
 	nickname := this.GetString("nickname")
 
 	if mobile == "" {
-		response := NewResponseData(-1, "`mobile` must not be empty.")
+		response := NewResponseData(-1, "`mobile` must not be empty.", make(DataJSON))
 		this.Data["json"] = response
 		fmt.Println(response)
 	} else {
@@ -50,5 +48,29 @@ func (this *UserController) Add() {
 			this.Data["json"] = map[string]int64{"uid": id}
 		}
 	}
+	this.ServeJSON()
+}
+
+func (this *UserController) Login() {
+
+	username := this.GetString("username")
+	// password := this.GetString("password")
+
+	userSession := this.GetSession(username)
+
+	if userSession == nil {
+		this.SetSession(username, int(1))
+		resCode := 0
+		resMessage := "success"
+		resData := make(DataJSON)
+		resData["username"] = username
+		resData["sessionId"] = int(1)
+		this.ServeResponse(resCode, resMessage, resData)
+
+	} else {
+		this.SetSession("asta", userSession.(int)+1)
+		this.Data["num"] = userSession.(int)
+	}
+
 	this.ServeJSON()
 }

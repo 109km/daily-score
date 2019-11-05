@@ -3,13 +3,11 @@ package controllers
 import (
 	"server/models"
 	"strconv"
-
-	"github.com/astaxie/beego"
 )
 
 // Operations about object
 type TaskController struct {
-	beego.Controller
+	BaseController
 }
 
 func (this *TaskController) GetAll() {

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "bee run",
     "build-centos": "CGO_ENABLED=0 GOOS=linux GOARCH=386 go build main.go",
     "run-in-nohop": "nohup ./main >> ./log/output.log 2>&1 &"
   }

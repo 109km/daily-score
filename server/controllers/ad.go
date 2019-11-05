@@ -2,13 +2,11 @@ package controllers
 
 import (
 	"server/models"
-
-	"github.com/astaxie/beego"
 )
 
 // Operations about Users
 type AdController struct {
-	beego.Controller
+	BaseController
 }
 
 func (this *AdController) GetAll() {
