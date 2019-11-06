@@ -18,13 +18,27 @@
         mobile: "13621253007",
         password: "123456"
       }
-      $.post('http://localhost:8080/v1/user/login/', data, function (res) {
+
+      $.get('http://localhost:8080/v1/user/', function (res) {
         if (res.code === 0) {
           console.log(res);
         } else {
           console.error(res);
         }
       });
+
+      $('button').click(function () {
+        $.post('http://localhost:8080/v1/user/login/', data, function (res) {
+          if (res.code === 0) {
+            console.log(res);
+          } else {
+            console.error(res);
+          }
+        });
+      })
+
+
+
     })()
   </script>
 </body>

@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"server/models"
 	"server/types"
 	"strconv"
@@ -20,19 +19,14 @@ func (this *UserController) GetAll() {
 	// sessionKey := this.Ctx.GetSecureCookie(beego.BConfig.WebConfig.Session.SessionName)
 	userSession := this.GetSession(USER_COOKIE_SESSION_ID)
 
-	fmt.Println(USER_COOKIE_SESSION_ID, userSession)
-
 	if err != nil {
 		resStatus = GetResponseStatusByName(types.CAN_NOT_GET_USERLIST)
+	} else if userSession == nil {
+		resStatus = GetResponseStatusByName(types.USER_NOT_LOGIN)
 	} else {
 		resData["list"] = users
 		resData["total"] = len(users)
-		resData["cookie"] = USER_COOKIE_SESSION_ID
-
-		if userSession != nil {
-			resData["sessionId"] = userSession.(int)
-		}
-
+		resData["sessionId"] = userSession.(int)
 	}
 
 	this.ServeResponse(resStatus, resData)
