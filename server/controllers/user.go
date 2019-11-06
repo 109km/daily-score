@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"server/models"
 	"server/types"
 	"strconv"
@@ -11,25 +12,30 @@ type UserController struct {
 	BaseController
 }
 
-type jsonUser struct {
-	data map[string]interface{}
-}
-
 func (this *UserController) GetAll() {
-	resCode := 0
-	resMessage := GetResponseMessageByCode(resCode)
+	resStatus := GetResponseStatusByName(types.SUCCESS)
 	resData := types.NewDataJSON()
 	users, err := models.GetAllUsers()
 
+	// sessionKey := this.Ctx.GetSecureCookie(beego.BConfig.WebConfig.Session.SessionName)
+	userSession := this.GetSession(USER_COOKIE_SESSION_ID)
+
+	fmt.Println(USER_COOKIE_SESSION_ID, userSession)
+
 	if err != nil {
-		resCode = -50002
-		resMessage = GetResponseMessageByCode(resCode)
+		resStatus = GetResponseStatusByName(types.CAN_NOT_GET_USERLIST)
 	} else {
 		resData["list"] = users
 		resData["total"] = len(users)
+		resData["cookie"] = USER_COOKIE_SESSION_ID
+
+		if userSession != nil {
+			resData["sessionId"] = userSession.(int)
+		}
+
 	}
 
-	this.ServeResponse(resCode, resMessage, resData)
+	this.ServeResponse(resStatus, resData)
 }
 
 func (this *UserController) Get() {
@@ -52,7 +58,9 @@ func (this *UserController) Add() {
 	nickname := this.GetString("nickname")
 
 	if mobile == "" {
-		this.ServeResponse(-1, "`mobile` must not be empty.", nil)
+		res := GetResponseStatusByName(types.REQUEST_PARAMS_ERROR)
+		res.Message = "`mobile` must not be empty."
+		this.ServeResponse(res, nil)
 	} else {
 		id, err := models.AddOneUser(mobile, password, nickname)
 		if err != nil {
@@ -69,29 +77,27 @@ func (this *UserController) Login() {
 	mobile := this.GetString("mobile")
 	password := this.GetString("password")
 
-	userSession := this.GetSession(mobile)
-
-	resCode := 0
-	resMessage := GetResponseMessageByCode(resCode)
+	resStatus := GetResponseStatusByName(types.SUCCESS)
 	resData := types.NewDataJSON()
+
+	userSession := this.GetSession(USER_COOKIE_SESSION_ID)
 
 	if userSession == nil {
 
 		_, err := models.LoginUser(mobile, password)
 		if err == nil {
-			this.SetSession(mobile, int(1))
+			this.SetSession(USER_COOKIE_SESSION_ID, int(1))
 			resData["mobile"] = mobile
 			resData["sessionId"] = int(1)
 		} else {
-			resCode = -50001
-			resMessage = GetResponseMessageByCode(resCode)
+			resStatus = GetResponseStatusByName(types.USERNAME_OR_PASSWORD_WRONG)
 		}
 	} else {
-		this.SetSession(mobile, userSession.(int))
-		resMessage = "not expired"
+		this.SetSession(USER_COOKIE_SESSION_ID, userSession.(int))
+		resStatus.Message = "not expired"
 		resData["mobile"] = mobile
 		resData["sessionId"] = userSession.(int)
 	}
-	this.ServeResponse(resCode, resMessage, resData)
+	this.ServeResponse(resStatus, resData)
 
 }

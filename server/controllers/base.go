@@ -8,25 +8,24 @@ import (
 
 var (
 	RESPONSE_STATUS_MESSAGE map[int]string
+	USER_COOKIE_SESSION_ID  string
 )
 
 type BaseController struct {
 	beego.Controller
 }
 
-func (this *BaseController) ServeResponse(code int, message string, data types.DataJSON) {
-	response := types.NewResponseData(code, message, data)
+func (this *BaseController) ServeResponse(rs types.ResponseStatusStructure, data types.DataJSON) {
+	// rs := types.ResponseStatusStructure{code, message}
+	response := types.NewResponseData(rs, data)
 	this.Data["json"] = response
 	this.ServeJSON()
 	this.StopRun()
 }
 
-func GetResponseMessageByCode(code int) string {
-	return RESPONSE_STATUS_MESSAGE[code]
+func GetResponseStatusByName(name string) types.ResponseStatusStructure {
+	return types.RESPONSE_STATUS[name]
 }
-
-func init() {
-	RESPONSE_STATUS_MESSAGE = make(map[int]string)
-	RESPONSE_STATUS_MESSAGE[0] = "success"
-	RESPONSE_STATUS_MESSAGE[-50001] = "用户名/密码错误"
+func (this *BaseController) Prepare() {
+	USER_COOKIE_SESSION_ID = this.Ctx.GetCookie(beego.BConfig.WebConfig.Session.SessionName)
 }

@@ -14,5 +14,6 @@ type IndexController struct {
 func (this *IndexController) GetAll() {
 	data := types.NewDataJSON()
 	data["name"] = "hello"
-	this.ServeResponse(0, "success", data)
+	res := GetResponseStatusByName(types.SUCCESS)
+	this.ServeResponse(res, data)
 }
