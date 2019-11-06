@@ -11,6 +11,8 @@ var (
 	OrmInstance orm.Ormer
 )
 
+var DefaultRowsLimit = 20
+
 type User struct {
 	Id       int64  `json:"id"`
 	Nickname string `json:"nickname"`
@@ -47,6 +49,7 @@ func init() {
 	orm.RegisterModel(new(User), new(Task), new(Ad))
 
 	OrmInstance = orm.NewOrm()
+
 }
 
 func ProceedSearchError(resErr error) (err error) {

@@ -19,9 +19,16 @@ func (this *UserController) GetAll() {
 	resCode := 0
 	resMessage := GetResponseMessageByCode(resCode)
 	resData := types.NewDataJSON()
-	users := models.GetAllUsers()
-	resData["list"] = users
-	resData["total"] = len(users)
+	users, err := models.GetAllUsers()
+
+	if err != nil {
+		resCode = -50002
+		resMessage = GetResponseMessageByCode(resCode)
+	} else {
+		resData["list"] = users
+		resData["total"] = len(users)
+	}
+
 	this.ServeResponse(resCode, resMessage, resData)
 }
 

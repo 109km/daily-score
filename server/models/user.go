@@ -14,10 +14,15 @@ func GetUserById(id int64) (user User, errorMsg error) {
 }
 
 // Get all users
-func GetAllUsers() []*User {
+func GetAllUsers() ([]*User, error) {
 	qs := OrmInstance.QueryTable("user")
-	qs.All(&UserList)
-	return UserList
+	_, responseError := qs.All(&UserList, "Id", "Mobile", "Nickname")
+
+	if responseError != nil {
+		return nil, ProceedSearchError(responseError)
+	}
+
+	return UserList, nil
 }
 
 func AddOneUser(mobile string, password string, nickname string) (uid int64, errorMsg error) {
