@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script src="//ad-1251636704.cos.ap-beijing.myqcloud.com/iqiyi-1029/zepto.min.js"></script>
+  <script>
+    (function () {
+      const data = {
+        mobile: "13621253007",
+        password: "123456"
+      }
+      $.get('http://localhost:8080/v1/user/', function (res) {
+        if (res.code === 0) {
+          console.log(res);
+        } else {
+          console.error(res);
+        }
+      });
+    })()
+  </script>
+</body>
+
+</html>

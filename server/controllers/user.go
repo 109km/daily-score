@@ -11,23 +11,31 @@ type UserController struct {
 	BaseController
 }
 
-func (u *UserController) GetAll() {
-	users := models.GetAllUsers()
-	u.Data["json"] = users
-	u.ServeJSON()
+type jsonUser struct {
+	data map[string]interface{}
 }
 
-func (u *UserController) Get() {
-	uid, _ := strconv.ParseInt(u.GetString(":uid"), 10, 64)
+func (this *UserController) GetAll() {
+	resCode := 0
+	resMessage := GetResponseMessageByCode(resCode)
+	resData := types.NewDataJSON()
+	users := models.GetAllUsers()
+	resData["list"] = users
+	resData["total"] = len(users)
+	this.ServeResponse(resCode, resMessage, resData)
+}
+
+func (this *UserController) Get() {
+	uid, _ := strconv.ParseInt(this.GetString(":uid"), 10, 64)
 	if uid > 0 {
 		user, err := models.GetUserById(uid)
 		if err != nil {
-			u.Data["json"] = err.Error()
+			this.Data["json"] = err.Error()
 		} else {
-			u.Data["json"] = user
+			this.Data["json"] = user
 		}
 	}
-	u.ServeJSON()
+	this.ServeJSON()
 }
 
 func (this *UserController) Add() {
@@ -57,8 +65,8 @@ func (this *UserController) Login() {
 	userSession := this.GetSession(mobile)
 
 	resCode := 0
-	resMessage := "success"
-	resData := make(types.DataJSON)
+	resMessage := GetResponseMessageByCode(resCode)
+	resData := types.NewDataJSON()
 
 	if userSession == nil {
 
@@ -69,9 +77,8 @@ func (this *UserController) Login() {
 			resData["sessionId"] = int(1)
 		} else {
 			resCode = -50001
-			resMessage = err.Error()
+			resMessage = GetResponseMessageByCode(resCode)
 		}
-
 	} else {
 		this.SetSession(mobile, userSession.(int))
 		resMessage = "not expired"
