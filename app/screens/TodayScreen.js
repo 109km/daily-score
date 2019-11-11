@@ -14,6 +14,9 @@ export default class TodayScreen extends Component {
       totalScore: this.state.totalScore + Number(val)
     });
   }
+  submitTask = () => {
+
+  }
   render() {
     return (
       <ScrollView style={styles.container}>

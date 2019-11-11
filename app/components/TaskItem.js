@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { InputItem, DatePicker, List, Picker } from '@ant-design/react-native';
 
-export default class TaskItem extends Component {
+export default class TaskItem extends PureComponent {
   state = {
     titleValue: "",
     defaultTimeValue: "",
@@ -10,11 +10,11 @@ export default class TaskItem extends Component {
     endTimeValue: "",
     timeSlices: 0,
     scoresArr: [
-      { label: "-2(对内在有伤害)", value: -2 },
-      { label: "-1(对外在有伤害)", value: -1 },
+      { label: "-2(伤害很大)", value: -2 },
+      { label: "-1(伤害一般)", value: -1 },
       { label: "0(无变化)", value: 0 },
-      { label: "1(对外在有成长)", value: 1 },
-      { label: "2(对内在有成长)", value: 2 }
+      { label: "1(成长一般)", value: 1 },
+      { label: "2(成长很大)", value: 2 }
     ],
     score: []
   }
@@ -94,9 +94,9 @@ export default class TaskItem extends Component {
           <InputItem
             value={this.state.titleValue}
             onChange={this.onTitleChange}
-            placeholder="输入时间片的内容"
+            placeholder="输入做了什么"
           >
-            干啥了
+            任务名
           </InputItem>
         </View>
         <View>
