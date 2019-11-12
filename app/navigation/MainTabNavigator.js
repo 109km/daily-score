@@ -4,7 +4,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import CalendarScreen from '../screens/CalendarScreen';
 import MyScreen from '../screens/MyScreen';
 import TodayScreen from '../screens/TodayScreen';
 
@@ -36,21 +36,21 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = '';
 
-const LinksStack = createStackNavigator(
+const CalendarStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Links: CalendarScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+CalendarStack.navigationOptions = {
+  tabBarLabel: '记录',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-calendar' : 'md-calendar'} />
   ),
 };
 
-LinksStack.path = '';
+CalendarStack.path = '';
 
 const MyStack = createStackNavigator(
   {
@@ -92,7 +92,7 @@ TodayStack.path = '';
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   TodayStack,
-  LinksStack,
+  CalendarStack,
   MyStack,
 });
 
