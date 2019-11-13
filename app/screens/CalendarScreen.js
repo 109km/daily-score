@@ -4,6 +4,8 @@ import { ExpoLinksView } from '@expo/samples';
 import { Calendar } from 'react-native-calendars';
 import dayjs from 'dayjs';
 import DayEventsList from '../components/DayEventsList';
+import http from '../utils/http';
+
 
 const CalendarDefaultStyle = {
   mainColor: '#1890ff',
@@ -37,6 +39,12 @@ export default class CalendarScreen extends Component {
       maxDate: maxDate,
       lastSelectedDate: ""
     }
+  }
+  async componentDidMount() {
+    const res = await http.get('http://172.16.46.204:8080/v1/event/', {
+      date: "2019-11-11"
+    });
+    console.log(res);
   }
   getCurrentDate = () => {
     return dayjs().format('YYYY-MM-DD');
