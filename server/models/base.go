@@ -9,6 +9,7 @@ import (
 
 var (
 	OrmInstance orm.Ormer
+	RawSeter    orm.RawSeter
 )
 
 var DefaultRowsLimit = 20
@@ -56,7 +57,6 @@ func init() {
 
 	// 注册model
 	orm.RegisterModel(new(User), new(Task), new(Ad), new(Event))
-
 	OrmInstance = orm.NewOrm()
 
 }

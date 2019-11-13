@@ -1,5 +1,9 @@
 package models
 
+import (
+	"bytes"
+)
+
 var (
 	EventsList []*Event
 )
@@ -11,6 +15,20 @@ func GetEvent(id int64) (event Event, err error) {
 
 	errorMsg := ProceedSearchError(resErr)
 	return res, errorMsg
+}
+
+func GetEventsByDate(date string) (list []*Event, err error) {
+	var rawSql bytes.Buffer
+	rawSql.WriteString("SELECT * from event WHERE DATE(start_time)=\"")
+	rawSql.WriteString(date)
+	rawSql.WriteString("\";")
+
+	_, err = OrmInstance.Raw(rawSql.String()).QueryRows(&EventsList)
+	if err == nil {
+		return EventsList, nil
+	} else {
+		return nil, err
+	}
 }
 
 func GetAllEvents() []*Event {
