@@ -21,9 +21,18 @@ type User struct {
 }
 
 type Task struct {
-	Id         int    `json:"id"`
+	Id         int64  `json:"id"`
 	Title      string `json:"title"`
 	UnitScore  int    `json:"unit_score"`
+	TotalScore int    `json:"total_score"`
+	StartTime  string `json:"start_time"`
+	EndTime    string `json:"end_time"`
+}
+
+type Event struct {
+	Id         int64  `json:"id"`
+	Title      string `json:"title"`
+	Level      int    `json:"level"`
 	TotalScore int    `json:"total_score"`
 	StartTime  string `json:"start_time"`
 	EndTime    string `json:"end_time"`
@@ -46,7 +55,7 @@ func init() {
 	orm.RegisterDataBase("default", "mysql", "root:s09070825!@tcp(127.0.0.1:3306)/daily_score?charset=utf8")
 
 	// 注册model
-	orm.RegisterModel(new(User), new(Task), new(Ad))
+	orm.RegisterModel(new(User), new(Task), new(Ad), new(Event))
 
 	OrmInstance = orm.NewOrm()
 

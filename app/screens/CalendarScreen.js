@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 import { Calendar } from 'react-native-calendars';
 import dayjs from 'dayjs';
+import DayEventsList from '../components/DayEventsList';
 
 const CalendarDefaultStyle = {
   mainColor: '#1890ff',
@@ -82,6 +83,9 @@ export default class CalendarScreen extends Component {
           markedDates={this.state.markedDates}
           arrowColor={CalendarDefaultStyle.mainColor}
         />
+        <View style={styles.taskList}>
+          <DayEventsList></DayEventsList>
+        </View>
       </ScrollView>
     );
   }
@@ -97,4 +101,10 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     backgroundColor: '#fff',
   },
+  taskList: {
+    marginTop: 20,
+    marginBottom: 20,
+    marginLeft: 20,
+    marginRight: 20
+  }
 });

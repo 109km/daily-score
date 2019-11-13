@@ -7,6 +7,7 @@ var USERNAME_OR_PASSWORD_WRONG = "USERNAME_OR_PASSWORD_WRONG"
 var CAN_NOT_GET_USERLIST = "CAN_NOT_GET_USERLIST"
 var REQUEST_PARAMS_ERROR = "REQUEST_PARAMS_ERROR"
 var USER_NOT_LOGIN = "USER_NOT_LOGIN"
+var EVENT_CREATED_ERROR = "EVENT_CREATED_ERROR"
 
 type ResponseStatusStructure struct {
 	Code    int    `json:"code"`
@@ -36,6 +37,9 @@ func init() {
 
 	// params
 	RESPONSE_STATUS[REQUEST_PARAMS_ERROR] = ResponseStatusStructure{-10002, "传入参数错误"}
+
+	// event
+	RESPONSE_STATUS[EVENT_CREATED_ERROR] = ResponseStatusStructure{-30001, "事件创建错误"}
 
 	// user
 	RESPONSE_STATUS[USERNAME_OR_PASSWORD_WRONG] = ResponseStatusStructure{-50001, "用户名/密码错误"}
