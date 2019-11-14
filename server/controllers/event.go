@@ -14,19 +14,17 @@ type EventController struct {
 func (this *EventController) GetAll() {
 	var events []*models.Event
 	var err error
-	var resStatus types.ResponseStatusStructure
 	resData := types.NewDataJSON()
-
+	resStatus := GetResponseStatusByName(types.SUCCESS)
 	date := this.GetString("date")
 
 	if date == "" {
 		events = models.GetAllEvents()
-		resStatus = GetResponseStatusByName(types.SUCCESS)
+
 		resData["list"] = events
 	} else {
 		events, err = models.GetEventsByDate(date)
 		if err == nil {
-
 			resData["list"] = events
 		} else {
 			resStatus = GetResponseStatusByName(types.EVENTS_FOUND_ERROR)

@@ -42,7 +42,7 @@ export default class CalendarScreen extends Component {
   }
   async componentDidMount() {
     const res = await http.get('http://172.16.46.204:8080/v1/event/', {
-      date: "2019-11-11"
+      date: this.state.currentDate
     });
     console.log(res);
   }
