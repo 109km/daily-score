@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0,shrink-to-fit=no" />
+  <meta name="theme-color" content="#000000" />
+  <title>中彝联手，祛癣圣方</title>
+  <link rel="stylesheet" href="//ad-1251636704.file.myqcloud.com/iqiyi-1029/global.css">
+  <link rel="stylesheet" href="//res.wx.qq.com/open/libs/weui/2.0.1/weui.min.css">
+  <style>
+    body {
+      font: 14px/1.5 "PingFangSC-Regular", "微软雅黑", tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;
+      padding-bottom: 47px;
+    }
+
+    a {
+      color: #3B9AFF;
+    }
+
+    img {
+      display: block;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    .layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .success-tips {
+      margin-top: 50%;
+      margin-left: auto;
+      margin-right: auto;
+      width: 320px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .success-tips .weui-msg {
+      padding-top: 20px;
+    }
+
+    .success-tips .weui-msg__icon-area {
+      margin-bottom: 20px;
+    }
+
+    .success-tips .weui-msg__text-area {
+      margin-bottom: 4px;
+    }
+
+    .success-tips .weui-msg__opr-area {
+      margin-bottom: 20px;
+    }
+
+    .form {
+      padding: 10px 30px 0 30px;
+    }
+
+    .question {
+      margin-bottom: 20px;
+    }
+
+    .form h2 {
+      font-size: 15px;
+      color: #e30b21;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .form h2 span {
+      font-weight: normal;
+      font-size: 12px;
+      color: #999;
+    }
+
+    .choices {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .choices .item {
+      flex-shrink: 0;
+      width: 50%;
+      margin-bottom: 10px;
+      line-height: 21px;
+      font-size: 15px;
+    }
+
+    /* .choices .item input[type="checkbox"] {
+      vertical-align: middle;
+      outline: none;
+      border: none;
+    } */
+
+    .user {
+      margin: 10px 0;
+    }
+
+    .user input {
+      display: block;
+      width: 300px;
+      text-indent: 10px;
+      line-height: 32px;
+      font-size: 14px;
+      margin: 0 auto 10px auto;
+      background: #e9e9e9;
+      outline: none;
+      border: none;
+      color: #333;
+    }
+
+    .btn {
+      display: block;
+      width: 300px;
+      margin: 20px auto 10px auto;
+      line-height: 42px;
+      font-size: 14px;
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+      background-color: #e30b21;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+    }
+
+    .counter.counter-advice {
+      margin: 15px auto;
+      padding: 0 15px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+      width: 320px;
+      height: 35px;
+      overflow: hidden;
+      background: #FFFFFF;
+      box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.15);
+      border-radius: 20px;
+      color: #333;
+      font-family: PingFangSC-Regular;
+    }
+
+    .icon.counter-advice {
+      -webkit-box-flex: 0;
+      -webkit-flex: none;
+      flex: none;
+      margin-right: 0.32rem;
+      color: #D0021B
+    }
+
+    .msg.counter-advice {
+      -webkit-box-flex: 0;
+      -webkit-flex: none;
+      flex: none;
+      display: -webkit-inline-box;
+      display: -webkit-inline-flex;
+      display: inline-flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-user-select: none;
+      user-select: none
+    }
+
+    .number.counter-advice {
+      font-weight: bold;
+      font-size: 20px;
+      color: #D0021B
+    }
+
+    .user-question {
+      margin-bottom: 20px;
+    }
+
+    .user-question .user-input {
+      border: 1px solid #dcdcdc;
+      border-radius: 2px;
+      background-color: #fff;
+
+    }
+
+    .user-question .user-input input {
+      width: 100%;
+      padding: 5px 10px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .user-question .user-input input::-webkit-input-placeholder {
+      color: #aaa;
+    }
+
+    .history-tips {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .history-tips input {
+      position: relative;
+      top: 2px;
+      margin-right: 5px;
+    }
+
+    .btn-submit-now {
+      margin-top: 15px;
+      width: 100%;
+      padding: 5px 0px;
+      background: rgb(215, 43, 0);
+      color: #fff;
+      font-weight: bold;
+      font-size: 22px;
+      text-align: center;
+      line-height: 1.5;
+      border-radius: 30px;
+    }
+
+    .order-list-scroll {
+      height: 40px;
+      width: 320px;
+      margin: 40px auto;
+      overflow: hidden;
+      line-height: 40px;
+      background: #FFFFFF;
+      box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.15);
+      border-radius: 20px;
+    }
+
+    .order-list-scroll .scroll-icon {
+      width: 80px;
+      text-align: center;
+      line-height: 40px;
+      position: relative;
+      top: 5px;
+    }
+
+    .order-list-scroll .scroll-item {
+      display: flex;
+      height: 40px;
+      align-content: center;
+    }
+
+    .order-list-scroll .scroll-item .scroll-content .content {
+      height: 40px;
+      overflow: hidden;
+    }
+
+    .order-list-scroll .scroll-content span {
+      margin-right: 10px;
+    }
+
+    .icon-hot {
+      width: 20px;
+      height: 20px;
+    }
+
+    .scroll-user-list {
+      margin: 20px 0;
+    }
+
+    .scroll-user-list .title {
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .scroll-user-list .scroll-wrapper {
+      background-image: url(//ad-1251636704.file.myqcloud.com/iqiyi-1111/user-list-bg.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% 100%;
+      box-sizing: border-box;
+      padding: 20px 40px 20px 40px;
+      height: 200px;
+      text-align: center;
+    }
+
+    .scroll-user-list .content {
+      height: 160px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-user-list .content .scroll-box {
+      display: flex;
+      justify-content: space-around;
+      height: 32px;
+      line-height: 32px;
+    }
+
+    .scroll-user-list .content .scroll-box span {
+      margin: 0 5px;
+    }
+
+    .animation {
+      transition-duration: 500ms;
+      transition-property: margin-top;
+    }
+
+    .btn-fixed {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    .btn-fixed .btn-phone {
+      position: absolute;
+      width: 93px;
+      height: 48px;
+      background: #fff;
+      border-top: 1px solid #e9e9e9;
+      text-align: center;
+      color: #333;
+    }
+
+    .btn-fixed p {
+      margin-top: -28px;
+    }
+
+    .btn-fixed img {
+      margin-left: 40px;
+    }
+
+    .btn-fixed .btn-phone svg {
+      width: 25px;
+      margin-top: -20px;
+    }
+
+    .company-name {
+      text-align: center;
+      padding-bottom: 5px;
+    }
+  </style>
+  <script>
+    (function (d, s) { var tpct = d.createElement(s); tpct.src = "//static.iqiyi.com/js/common/tpct.min.js"; var es = d.getElementsByTagName(s)[0]; es.parentNode.insertBefore(tpct, es); })(document, "script")
+  </script>
+</head>
+
+<body>
+  <div name="root" class="container">
+    <img src="//ad-1251636704.file.myqcloud.com/iqiyi-1111/11.jpg" alt="" />
+
+
+    <div class="counter counter-advice">
+      <svg class="icon counter-advice" style="
+      width: 24px;
+      height: 20px;
+    " viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M16.106 13.214c-.342-.396-.334-.856.005-1.216.59-.626.915-1.448.915-2.32 0-.875-.328-1.7-.92-2.326a.93.93 0 0 1 .014-1.283c.349-.35.827-.119.95.014a5.194 5.194 0 0 1 1.421 3.595 5.202 5.202 0 0 1-1.412 3.585c-.172.184-.771.184-.973-.049zm-2.604 6.146c-.19 0-.379-.047-.553-.142L4.403 14.52H1.174C.525 14.52 0 13.976 0 13.31V6.05c0-.669.525-1.21 1.174-1.21h3.229L12.949.142c.365-.199.803-.19 1.158.03.353.218.569.613.569 1.038v16.94c0 .425-.216.82-.569 1.037a1.172 1.172 0 0 1-.605.173zM1.324 13.08h3.372c.193 0 .383.05.553.143l8.09 4.547V1.576L5.248 6.09c-.17.095-.36.142-.553.142H1.324v6.849zm2.838-7.456h1.236v8.408H4.162V5.624zm13.299 11.254c-.298-.394-.097-.974.286-1.283a7.52 7.52 0 0 0 1.702-1.925 7.669 7.669 0 0 0 1.13-4.03c0-2.319-1.016-4.476-2.784-5.917-.38-.311-.489-.873-.188-1.265.226-.234.787-.207.963-.067C20.743 4.431 22 6.805 22 9.681c0 2.906-1.28 5.598-3.51 7.386-.257.206-.86.072-1.029-.19z"
+          fill="currentColor" fill-rule="nonzero"></path>
+      </svg>
+      <div class="msg counter-advice"><span class="prefix">目前已经有</span>
+        <span class="number counter-advice">4892</span>
+        <span class="suffix">人领取治癣方案</span></div>
+    </div>
+
+    <form class="form" id="form-top">
+      <div class="question">
+        <h2>您有哪些癣病症状？<span>(多选)</span></h2>
+        <div class="choices">
+          <label class="item">
+            <input type="checkbox" name="q1" value="体癣"> 体癣
+          </label>
+          <label class="item">
+            <input type="checkbox" name="q1" value="手癣"> 手癣
+          </label>
+          <label class="item">
+            <input type="checkbox" name="q1" value="足癣"> 足癣
+          </label>
+          <label class="item">
+            <input type="checkbox" name="q1" value="其他部位"> 其他部位
+          </label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h2>您的癣症严重吗？<span>(单选)</span></h2>
+        <div class="choices">
+          <label class="item">
+            <input type="radio" name="q2" value="严重"> 严重
+          </label>
+          <label class="item">
+            <input type="radio" name="q2" value="一般"> 一般
+          </label>
+          <label class="item">
+            <input type="radio" name="q2" value="轻微"> 轻微
+          </label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h2>您出现癣病症状多久了？<span>(单选)</span></h2>
+        <div class="choices">
+          <label class="item">
+            <input type="radio" name="q3" value="1年以内"> 1年以内
+          </label>
+          <label class="item">
+            <input type="radio" name="q3" value="1-3年"> 1-3年
+          </label>
+          <label class="item">
+            <input type="radio" name="q3" value="3-5年"> 3-5年
+          </label>
+          <label class="item">
+            <input type="radio" name="q3" value="5年以上"> 5年以上
+          </label>
+        </div>
+      </div>
+
+      <div class="user-question">
+        <h2>您的姓名*</h2>
+        <div class="user-input">
+          <input class="name" type="text" name="name" placeholder="请输入" maxlength="32" />
+        </div>
+      </div>
+
+      <div class="user-question">
+        <h2>您的联系方式*</h2>
+        <div class="user-input">
+          <input class="user-phone phone" type="text" name="phone" placeholder="请输入" maxlength="11" />
+        </div>
+      </div>
+      <div class="history-tips">
+
+        <label for="is-history-01">
+          <input type="checkbox" id="is-history-01" name="is-history-01" checked />自动输入历史手机号
+        </label>
+        <a href="javascript:;" class="user-auth-agreement">《个人信息授权书》</a>
+      </div>
+
+      <div class="btn-submit-now">
+        立即提交 领取治癣方案
+      </div>
+
+      <!-- <div class="user">
+        <input type="text" id="name" name="name" placeholder="姓名" maxlength="32" />
+        <input type="text" id="phone" name="phone" placeholder="电话" maxlength="11" />
+        <a class="btn" href="javascript:;">免费获取治疗方案</a>
+      </div> -->
+    </form>
+
+    <div class="order-list-scroll order-list-single">
+      <div class="scroll-item">
+        <div class="scroll-icon">
+          <svg class="icon icon-hot" viewBox="0 0 14 17" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M3.941 16.8c-1.078-2.33-.504-3.667.322-4.923.903-1.373 1.141-2.74 1.141-2.74s.707.965.427 2.47c1.253-1.461 1.491-3.777 1.302-4.668 2.842 2.067 4.054 6.545 2.415 9.861 8.702-5.128 2.164-12.797 1.03-13.666.377.869.447 2.33-.316 3.038C8.967 1.052 5.762 0 5.762 0c.377 2.644-1.38 5.53-3.067 7.691-.063-1.051-.126-1.782-.658-2.79C1.918 6.815.511 8.378.133 10.291c-.51 2.601.385 4.5 3.808 6.509z"
+              fill="#F44" fill-rule="nonzero"></path>
+          </svg>
+        </div>
+        <div class="scroll-content">
+          <div class="content">
+            <div class="js-scroll animation">
+              <div class="scroll-box">
+                <span>杨**</span>
+                <span>139****3591</span>
+                <span>1小时前</span>
+              </div>
+              <div class="scroll-box">
+                <span>王**</span>
+                <span>181****7371</span>
+                <span>1小时前</span>
+              </div>
+              <div class="scroll-box">
+                <span>张**</span>
+                <span>180****3760</span>
+                <span>1小时前</span>
+              </div>
+              <div class="scroll-box">
+                <span>王**</span>
+                <span>138****3436</span>
+                <span>1小时前</span>
+              </div>
+              <div class="scroll-box">
+                <span>杨**</span>
+                <span>130****3801</span>
+                <span>2小时前</span>
+              </div>
+              <div class="scroll-box">
+                <span>张**</span>
+                <span>157****2341</span>
+                <span>2小时前</span>
+              </div>
+              <div class="scroll-box">
+                <span>李**</span>
+                <span>155****9011</span>
+                <span>2小时前</span>
+              </div>
+              <div class="scroll-box">
+                <span>张**</span>
+                <span>135****7618</span>
+                <span>2小时前</span>
+              </div>
+              <div class="scroll-box">
+                <span>万**</span>
+                <span>151****3810</span>
+                <span>2小时前</span>
+              </div>
+              <div class="scroll-box">
+                <span>孙**</span>
+                <span>152****0731</span>
+                <span>3小时前</span>
+              </div>
+              <div class="scroll-box">
+                <span>于**</span>
+                <span>131****4409</span>
+                <span>3小时前</span>
+              </div>
+              <div class="scroll-box">
+                <span>林**</span>
+                <span>150****6281</span>
+                <span>3小时前</span>
+              </div>
+              <div class="scroll-box">
+                <span>王**</span>
+                <span>167****2581</span>
+                <span>3小时前</span>
+              </div>
+              <div class="scroll-box">
+                <span>高**</span>
+                <span>181****5831</span>
+                <span>3小时前</span>
+              </div>
+              <div class="scroll-box">
+                <span>李**</span>
+                <span>137****0379</span>
+                <span>3小时前</span>
+              </div>
+              <div class="scroll-box">
+                <span>宋**</span>
+                <span>132****6385</span>
+                <span>3小时前</span>
+              </div>
+              <div class="scroll-box">
+                <span>张**</span>
+                <span>165****2508</span>
+                <span>3小时前</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <video src="//ad-1251636704.file.myqcloud.com/iqiyi-1111/33.mp4"
+      poster="//ad-1251636704.file.myqcloud.com/iqiyi-1111/cover.jpg" playsinline controls preload="none"
+      controlslist="nodownload"></video>
+
+    <img src="//ad-1251636704.file.myqcloud.com/iqiyi-1111/44.jpg" alt="" />
+    <div class="counter counter-advice">
+      <svg class="icon counter-advice" style="
+        width: 24px;
+        height: 20px;
+      " viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M16.106 13.214c-.342-.396-.334-.856.005-1.216.59-.626.915-1.448.915-2.32 0-.875-.328-1.7-.92-2.326a.93.93 0 0 1 .014-1.283c.349-.35.827-.119.95.014a5.194 5.194 0 0 1 1.421 3.595 5.202 5.202 0 0 1-1.412 3.585c-.172.184-.771.184-.973-.049zm-2.604 6.146c-.19 0-.379-.047-.553-.142L4.403 14.52H1.174C.525 14.52 0 13.976 0 13.31V6.05c0-.669.525-1.21 1.174-1.21h3.229L12.949.142c.365-.199.803-.19 1.158.03.353.218.569.613.569 1.038v16.94c0 .425-.216.82-.569 1.037a1.172 1.172 0 0 1-.605.173zM1.324 13.08h3.372c.193 0 .383.05.553.143l8.09 4.547V1.576L5.248 6.09c-.17.095-.36.142-.553.142H1.324v6.849zm2.838-7.456h1.236v8.408H4.162V5.624zm13.299 11.254c-.298-.394-.097-.974.286-1.283a7.52 7.52 0 0 0 1.702-1.925 7.669 7.669 0 0 0 1.13-4.03c0-2.319-1.016-4.476-2.784-5.917-.38-.311-.489-.873-.188-1.265.226-.234.787-.207.963-.067C20.743 4.431 22 6.805 22 9.681c0 2.906-1.28 5.598-3.51 7.386-.257.206-.86.072-1.029-.19z"
+          fill="currentColor" fill-rule="nonzero"></path>
+      </svg>
+      <div class="msg counter-advice"><span class="prefix">目前已经有</span>
+        <span class="number counter-advice">4892</span>
+        <span class="suffix">人领取治癣方案</span></div>
+    </div>
+    <form class="form" id="form-bottom">
+      <div class="question">
+        <h2>您有哪些癣病症状？<span>(多选)</span></h2>
+        <div class="choices">
+          <label class="item">
+            <input type="checkbox" name="q1" value="体癣"> 体癣
+          </label>
+          <label class="item">
+            <input type="checkbox" name="q1" value="手癣"> 手癣
+          </label>
+          <label class="item">
+            <input type="checkbox" name="q1" value="足癣"> 足癣
+          </label>
+          <label class="item">
+            <input type="checkbox" name="q1" value="其他部位"> 其他部位
+          </label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h2>您的癣症严重吗？<span>(单选)</span></h2>
+        <div class="choices">
+          <label class="item">
+            <input type="radio" name="q2" value="严重"> 严重
+          </label>
+          <label class="item">
+            <input type="radio" name="q2" value="一般"> 一般
+          </label>
+          <label class="item">
+            <input type="radio" name="q2" value="轻微"> 轻微
+          </label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h2>您出现癣病症状多久了？<span>(单选)</span></h2>
+        <div class="choices">
+          <label class="item">
+            <input type="radio" name="q3" value="1年以内"> 1年以内
+          </label>
+          <label class="item">
+            <input type="radio" name="q3" value="1-3年"> 1-3年
+          </label>
+          <label class="item">
+            <input type="radio" name="q3" value="3-5年"> 3-5年
+          </label>
+          <label class="item">
+            <input type="radio" name="q3" value="5年以上"> 5年以上
+          </label>
+        </div>
+      </div>
+
+      <div class="user-question">
+        <h2>您的姓名*</h2>
+        <div class="user-input">
+          <input class="name" type="text" name="name" placeholder="请输入" maxlength="32" />
+        </div>
+      </div>
+
+      <div class="user-question">
+        <h2>您的联系方式*</h2>
+        <div class="user-input">
+          <input class="user-phone phone" type="text" name="phone" placeholder="请输入" maxlength="11" />
+        </div>
+      </div>
+      <div class="history-tips">
+
+        <label for="is-history-01">
+          <input type="checkbox" id="is-history-01" name="is-history-01" checked />自动输入历史手机号
+        </label>
+        <a href="javascript:;" class="user-auth-agreement">《个人信息授权书》</a>
+      </div>
+
+      <div class="btn-submit-now">
+        立即提交 领取治癣方案
+      </div>
+
+      <!-- <div class="user">
+          <input type="text" id="name" name="name" placeholder="姓名" maxlength="32" />
+          <input type="text" id="phone" name="phone" placeholder="电话" maxlength="11" />
+          <a class="btn" href="javascript:;">免费获取治疗方案</a>
+        </div> -->
+    </form>
+
+    <div class="scroll-user-list">
+      <h2 class="title">最新报名客户</h2>
+      <div class="scroll-wrapper">
+        <div class="content">
+          <div class="js-scroll animation">
+            <div class="scroll-box">
+              <span>朱**</span>
+              <span>134****6571</span>
+              <span>1小时前</span>
+            </div>
+            <div class="scroll-box">
+              <span>李**</span>
+              <span>181****0536</span>
+              <span>1小时前</span>
+            </div>
+            <div class="scroll-box">
+              <span>张**</span>
+              <span>159****3131</span>
+              <span>1小时前</span>
+            </div>
+            <div class="scroll-box">
+              <span>王**</span>
+              <span>180****0886</span>
+              <span>1小时前</span>
+            </div>
+            <div class="scroll-box">
+              <span>杨**</span>
+              <span>139****3391</span>
+              <span>2小时前</span>
+            </div>
+            <div class="scroll-box">
+              <span>张**</span>
+              <span>156****6011</span>
+              <span>2小时前</span>
+            </div>
+            <div class="scroll-box">
+              <span>孙**</span>
+              <span>185****4561</span>
+              <span>2小时前</span>
+            </div>
+            <div class="scroll-box">
+              <span>杨**</span>
+              <span>139****3391</span>
+              <span>2小时前</span>
+            </div>
+            <div class="scroll-box">
+              <span>张**</span>
+              <span>159****3241</span>
+              <span>2小时前</span>
+            </div>
+            <div class="scroll-box">
+              <span>孙**</span>
+              <span>155****4731</span>
+              <span>3小时前</span>
+            </div>
+            <div class="scroll-box">
+              <span>杨**</span>
+              <span>153****4260</span>
+              <span>3小时前</span>
+            </div>
+            <div class="scroll-box">
+              <span>林**</span>
+              <span>130****6581</span>
+              <span>3小时前</span>
+            </div>
+            <div class="scroll-box">
+              <span>王**</span>
+              <span>166****2281</span>
+              <span>3小时前</span>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <img src="//ad-1251636704.file.myqcloud.com/iqiyi-1111/55.jpg" alt="" />
+
+    <!-- <p class="company-name">
+      重庆庆格泰药房连锁有限公司
+    </p> -->
+    <div class="btn-fixed">
+      <a href="tel:15510423226" class="btn-phone">
+        <svg t="1573483904256" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+          p-id="1177" width="64" height="64">
+          <path
+            d="M772.654545 900.654545l-13.963636-4.654545C165.236364 714.472727 128 265.309091 125.672727 260.654545V232.727273l155.927273-116.363637 160.581818 209.454546-81.454545 90.763636c27.927273 95.418182 174.545455 200.145455 242.036363 242.036364l109.381819-74.472727 190.836363 169.890909-130.327273 146.618181zM172.218182 258.327273c2.327273 25.6 44.218182 416.581818 586.472727 588.8l83.781818-88.436364-128-114.036364-104.727272 69.818182-11.636364-6.981818c-9.309091-6.981818-249.018182-146.618182-279.272727-290.909091l-2.327273-11.636363 72.145454-79.127273L279.272727 183.854545l-107.054545 74.472728z"
+            p-id="1178"></path>
+        </svg>
+        <p>电话咨询</p>
+      </a>
+      <a href="#form-bottom">
+        <img src="//ad-1251636704.file.myqcloud.com/iqiyi-1111/66.jpg" alt="" />
+      </a>
+    </div>
+
+
+    <div class="layer hide">
+      <div class="success-tips">
+        <div class="weui-msg">
+          <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+          <div class="weui-msg__text-area">
+            <h2 class="weui-msg__title">操作成功</h2>
+            <p class="weui-msg__desc">我们的专家会在24小时内联系您，请保持电话畅通！</p>
+          </div>
+          <div class="weui-msg__opr-area">
+            <p class="weui-btn-area">
+              <a href="javascript:;" id="btn-close" class="weui-btn weui-btn_primary">知道了</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="//ad-1251636704.file.myqcloud.com/iqiyi-1029/scale.js"></script>
+  <script src="//ad-1251636704.file.myqcloud.com/iqiyi-1029/global.js"></script>
+  <script src="//ad-1251636704.file.myqcloud.com/iqiyi-1029/zepto.min.js"></script>
+  <script type="text/javascript" src="//res.wx.qq.com/open/libs/weuijs/1.2.1/weui.min.js"></script>
+  <script>
+      (function () {
+        var isSubmited = false;
+
+        var App = {
+          init: function () {
+            App.bindSubmit();
+            App.bindTipsClose();
+            App.bindUserAgreement();
+            App.startScroll();
+            App.createRandomUserNum();
+          },
+          checkIsChoosed: function (form) {
+            var questions = form.find('.question');
+            var isFilledCount = 0;
+            questions.each(function (index1, question) {
+              var inputs = $(question).find('input');
+              var isThisQuestionFilled = false;
+              inputs.each(function (index2, input) {
+                var $input = $(input);
+                var inputType = $input.attr("type");
+                if ($input.prop("checked") === true && !isThisQuestionFilled) {
+                  isFilledCount = isFilledCount + 1;
+                  isThisQuestionFilled = true;
+                }
+              });
+            });
+            return isFilledCount === 3 ? true : false;
+          },
+          isMobile: function (mobile) {
+            return /^1[3456789][0-9]{9}$/.test(mobile);
+          },
+          checkNameAndPhone: function (form) {
+            var name = $.trim(form.find('.name').val());
+            var phone = $.trim(form.find('.phone').val());
+
+            if (name.length === 0) {
+              weui.alert("请填写姓名");
+              return false;
+            }
+            if (phone.length === 0 || !App.isMobile(phone)) {
+              weui.alert("请填写正确的手机号");
+              return false;
+            }
+            return true;
+          },
+          showTips: function (isShow) {
+            if (isShow) {
+              $('.layer').removeClass('hide');
+            } else {
+              $('.layer').addClass('hide');
+            }
+          },
+          bindSubmit: function () {
+            $('.btn-submit-now').click(function (e) {
+              e.preventDefault();
+
+              if (isSubmited) {
+                weui.alert("请勿重复提交！");
+                return;
+              }
+              var form = $(this).closest('.form');
+              if (App.checkIsChoosed(form) === false) {
+                weui.alert("选择题未答完！");
+                return;
+              }
+              if (App.checkNameAndPhone(form) === false) {
+                return;
+              }
+
+
+              var data = form.serialize();
+
+              var url = "http://localhost:8080/v1/ad/add/"
+              if (location.href.indexOf("shulanbaobei") >= 0) {
+                url = 'https://www.shulanbaobei.com/v1/ad/add/';
+              }
+              $.post(url, data, function (res) {
+                if (res.id > 0) {
+                  // weui.alert("我们的专家会在24小时内联系您，请保持电话畅通！", {
+                  //   title: "提交成功！"
+                  // }); 
+                  App.showTips(true);
+                  isSubmited = true;
+                  iqiyiTpct.track(19901);
+                } else if (res.id < 0) {
+                  weui.alert("该手机号已提交，请等待专家联系您。");
+                } else {
+                  console.error(res);
+                }
+              });
+            });
+          },
+          bindTipsClose: function () {
+            $('#btn-close').click(function () {
+              App.showTips(false);
+            });
+          },
+          bindUserAgreement: function () {
+            $('.user-auth-agreement').click(function () {
+              weui.dialog({
+                title: "个人信息授权书",
+                content: "尊敬的用户，您选择使用“自动输入历史手机号”功能后，您同意本平台在法律允许的范围内，收集您的手机号码，您已知晓并同意在您下次浏览广告页面时，我们会帮您预先填写您上次输入的历史手机号，您的手机号码仅会用于在广告页面的预填充，且只有您点击提交按钮之后信息才会传递给广告主商家。"
+              });
+            });
+          },
+          scrollMessage: function (selector, scrollSize, duration) {
+            var $outer = $(selector);
+            var $inner = $(selector).find('.js-scroll');
+            var move = function () {
+              var items = $inner.children();
+              var $append = $(items[0]).clone();
+              $inner.addClass("animation");
+              $inner.css("margin-top", -scrollSize);
+              $inner.append($append);
+              setTimeout(function () {
+                $(items[0]).remove();
+                $inner.removeClass("animation");
+                $inner.css("margin-top", 0);
+              }, 1000)
+            }
+            setInterval(move, duration * 1000)
+          },
+          startScroll: function () {
+            // 名单滚动
+            App.scrollMessage('.scroll-wrapper', 32, 5);
+            App.scrollMessage('.scroll-content', 40, 4);
+          },
+          createRandomUserNum: function () {
+            var startDate = new Date("2019-11-10 00:00:00").getTime();
+            var currentTime = new Date().getTime();
+            var startNum = 5260;
+            var num = Math.floor((currentTime - startDate) / 1000 / 60 / 60 * 5);
+            $('.counter-advice.number').text(startNum + num);
+          }
+        }
+
+        App.init();
+
+      })()
+  </script>
+</body>
+
+</html>
