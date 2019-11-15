@@ -16,15 +16,15 @@ func main() {
 		// beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
 	}
 
-	beego.BConfig.Listen.EnableAdmin = true
+	// beego.BConfig.Listen.EnableAdmin = true
 
-	beego.BConfig.WebConfig.Session.SessionOn = true
-	beego.BConfig.WebConfig.Session.SessionName = "daily_score_session_id"
-	beego.BConfig.WebConfig.Session.SessionGCMaxLifetime = 3600
+	// beego.BConfig.WebConfig.Session.SessionOn = true
+	// beego.BConfig.WebConfig.Session.SessionName = "daily_score_session_id"
+	// beego.BConfig.WebConfig.Session.SessionGCMaxLifetime = 3600
 
-	// Set session provider config
-	beego.BConfig.WebConfig.Session.SessionProvider = "redis"
-	beego.BConfig.WebConfig.Session.SessionProviderConfig = "127.0.0.1:6379"
+	// // Set session provider config
+	// beego.BConfig.WebConfig.Session.SessionProvider = "redis"
+	// beego.BConfig.WebConfig.Session.SessionProviderConfig = "127.0.0.1:6379"
 
 	beego.SetStaticPath("/public", "public")
 	beego.Run()

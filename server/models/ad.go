@@ -5,19 +5,29 @@ import (
 	"time"
 )
 
+var MaxRowsLimit = 1000
+
 // Get all ads
-func GetAllAds() []*Ad {
-	var AdList []*Ad
-	qs := OrmInstance.QueryTable("ad")
+func GetAllAds(start int, limit int) (AdList []*Ad, total int64) {
+
+	if limit > MaxRowsLimit {
+		limit = MaxRowsLimit
+	}
+	total, _ = OrmInstance.QueryTable("ad").Count()
+	qs := OrmInstance.QueryTable("ad").Limit(limit, start)
 	qs.All(&AdList)
-	return AdList
+	return AdList, total
 }
 
-func GetAdsByDate(date string) []*Ad {
-	var AdList []*Ad
+func GetAdsByDate(date string, start int, limit int) (AdList []*Ad, total int64) {
+
+	if limit > MaxRowsLimit {
+		limit = MaxRowsLimit
+	}
 	qs := OrmInstance.QueryTable("ad")
-	qs.Filter("submit_time__exact", date).All(&AdList)
-	return AdList
+	total, _ = qs.Filter("submit_time__exact", date).Count()
+	qs.Limit(limit, start).All(&AdList)
+	return AdList, total
 }
 
 func AddOneAd(q1 []string, q2 string, q3 string, name string, phone string) (aid int64, err error) {
