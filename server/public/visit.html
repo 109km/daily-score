@@ -9,7 +9,6 @@
 </head>
 
 <body>
-  <button>登录</button>
 
   <script src="//ad-1251636704.cos.ap-beijing.myqcloud.com/iqiyi-1029/zepto.min.js"></script>
   <script>
@@ -18,7 +17,6 @@
         mobile: "13621253007",
         password: "123456"
       }
-
       $.get('http://localhost:8080/v1/user/', function (res) {
         if (res.code === 0) {
           console.log(res);
@@ -26,19 +24,6 @@
           console.error(res);
         }
       });
-
-      $('button').click(function () {
-        $.post('http://localhost:8080/v1/user/login/', data, function (res) {
-          if (res.code === 0) {
-            console.log(res);
-          } else {
-            console.error(res);
-          }
-        });
-      })
-
-
-
     })()
   </script>
 </body>

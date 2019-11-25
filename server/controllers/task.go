@@ -17,7 +17,7 @@ func (this *TaskController) GetAll() {
 }
 
 func (this *TaskController) Get() {
-	id, _ := strconv.Atoi(this.GetString(":tid"))
+	id, _ := strconv.ParseInt(this.GetString(":tid"), 10, 64)
 	if id > 0 {
 		task, err := models.GetTask(id)
 		if err != nil {

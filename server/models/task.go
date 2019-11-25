@@ -4,7 +4,7 @@ var (
 	TaskList []*Task
 )
 
-func GetTask(id int) (task Task, err error) {
+func GetTask(id int64) (task Task, err error) {
 
 	res := Task{Id: id}
 	resErr := OrmInstance.Read(&res)

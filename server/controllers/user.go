@@ -11,23 +11,38 @@ type UserController struct {
 	BaseController
 }
 
-func (u *UserController) GetAll() {
-	users := models.GetAllUsers()
-	u.Data["json"] = users
-	u.ServeJSON()
+func (this *UserController) GetAll() {
+	resStatus := GetResponseStatusByName(types.SUCCESS)
+	resData := types.NewDataJSON()
+	users, err := models.GetAllUsers()
+
+	// sessionKey := this.Ctx.GetSecureCookie(beego.BConfig.WebConfig.Session.SessionName)
+	userSession := this.GetSession(USER_COOKIE_SESSION_ID)
+
+	if err != nil {
+		resStatus = GetResponseStatusByName(types.CAN_NOT_GET_USERLIST)
+	} else if userSession == nil {
+		resStatus = GetResponseStatusByName(types.USER_NOT_LOGIN)
+	} else {
+		resData["list"] = users
+		resData["total"] = len(users)
+		resData["sessionId"] = userSession.(int)
+	}
+
+	this.ServeResponse(resStatus, resData)
 }
 
-func (u *UserController) Get() {
-	uid, _ := strconv.ParseInt(u.GetString(":uid"), 10, 64)
+func (this *UserController) Get() {
+	uid, _ := strconv.ParseInt(this.GetString(":uid"), 10, 64)
 	if uid > 0 {
 		user, err := models.GetUserById(uid)
 		if err != nil {
-			u.Data["json"] = err.Error()
+			this.Data["json"] = err.Error()
 		} else {
-			u.Data["json"] = user
+			this.Data["json"] = user
 		}
 	}
-	u.ServeJSON()
+	this.ServeJSON()
 }
 
 func (this *UserController) Add() {
@@ -37,7 +52,9 @@ func (this *UserController) Add() {
 	nickname := this.GetString("nickname")
 
 	if mobile == "" {
-		this.ServeResponse(-1, "`mobile` must not be empty.", nil)
+		res := GetResponseStatusByName(types.REQUEST_PARAMS_ERROR)
+		res.Message = "`mobile` must not be empty."
+		this.ServeResponse(res, nil)
 	} else {
 		id, err := models.AddOneUser(mobile, password, nickname)
 		if err != nil {
@@ -54,30 +71,27 @@ func (this *UserController) Login() {
 	mobile := this.GetString("mobile")
 	password := this.GetString("password")
 
-	userSession := this.GetSession(mobile)
+	resStatus := GetResponseStatusByName(types.SUCCESS)
+	resData := types.NewDataJSON()
 
-	resCode := 0
-	resMessage := "success"
-	resData := make(types.DataJSON)
+	userSession := this.GetSession(USER_COOKIE_SESSION_ID)
 
 	if userSession == nil {
 
 		_, err := models.LoginUser(mobile, password)
 		if err == nil {
-			this.SetSession(mobile, int(1))
+			this.SetSession(USER_COOKIE_SESSION_ID, int(1))
 			resData["mobile"] = mobile
 			resData["sessionId"] = int(1)
 		} else {
-			resCode = -50001
-			resMessage = err.Error()
+			resStatus = GetResponseStatusByName(types.USERNAME_OR_PASSWORD_WRONG)
 		}
-
 	} else {
-		this.SetSession(mobile, userSession.(int))
-		resMessage = "not expired"
+		this.SetSession(USER_COOKIE_SESSION_ID, userSession.(int))
+		resStatus.Message = "not expired"
 		resData["mobile"] = mobile
 		resData["sessionId"] = userSession.(int)
 	}
-	this.ServeResponse(resCode, resMessage, resData)
+	this.ServeResponse(resStatus, resData)
 
 }

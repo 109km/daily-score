@@ -2,6 +2,8 @@ package controllers
 
 import (
 	"server/models"
+	"server/types"
+	"strconv"
 )
 
 // Operations about Users
@@ -12,22 +14,32 @@ type AdController struct {
 func (this *AdController) GetAll() {
 
 	date := this.GetString("date")
+	start, _ := strconv.Atoi(this.GetString("start"))
+	limit, _ := strconv.Atoi(this.GetString("limit"))
+	resStatus := GetResponseStatusByName(types.SUCCESS)
+	resData := types.NewDataJSON()
+
+	if limit == 0 {
+		limit = 10
+	}
 
 	var ads []*models.Ad
+	var total int64
 
 	if date == "" {
-		ads = models.GetAllAds()
+		ads, total = models.GetAllAds(start, limit)
 	} else {
-		ads = models.GetAdsByDate(date)
+		ads, total = models.GetAdsByDate(date, start, limit)
 	}
 
 	this.Ctx.Output.Header("Access-Control-Allow-Origin", "*")
 	this.Ctx.Output.Header("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE")
 	this.Ctx.Output.Header("Access-Control-Allow-Headers", "x-requested-with,content-type")
 	// this.Ctx.Output.Header("Access-Control-Allow-Credentials", "true")
-
-	this.Data["json"] = ads
-	this.ServeJSON()
+	resData["total"] = total
+	resData["list"] = ads
+	// this.Data["json"] = ads
+	this.ServeResponse(resStatus, resData)
 }
 
 func (this *AdController) Add() {
