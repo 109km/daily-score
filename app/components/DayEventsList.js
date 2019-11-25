@@ -4,18 +4,15 @@ import { Card } from '@ant-design/react-native';
 export default class DayTaskList extends PureComponent {
   constructor(props) {
     super(props)
-    this.state = {
-      list: props.list
-    }
   }
   async componentDidMount() {
 
   }
   render() {
 
-    const item = () => {
+    const item = (data, index) => {
       return (
-        <Card>
+        <Card key={`item-card-${index}`}>
           <Card.Header
             title="This is title"
             thumbStyle={{ width: 30, height: 30 }}
@@ -35,14 +32,17 @@ export default class DayTaskList extends PureComponent {
       )
     }
 
+    const list = () => {
+      return (
+        <View style={styles.list}>
+          {this.props.list.map(item)}
+        </View>
+      )
+    }
+
     return (
       <View style={styles.container}>
-
-
-
-
-
-
+        {list()}
       </View>
     )
   }
@@ -53,4 +53,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
   },
+  list: {
+    backgroundColor: '#f9f9f9'
+  }
 });

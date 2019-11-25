@@ -37,11 +37,12 @@ export default class CalendarScreen extends Component {
       markedDates: markedDates,
       currentDate: currentDate,
       maxDate: maxDate,
+      todayList: [1, 2, 3],
       lastSelectedDate: ""
     }
   }
   async componentDidMount() {
-    const res = await http.get('http://172.16.46.204:8080/v1/event/', {
+    const res = await http.get('http://172.16.44.206:8080/v1/event/', {
       date: this.state.currentDate
     });
     console.log(res);
@@ -92,7 +93,7 @@ export default class CalendarScreen extends Component {
           arrowColor={CalendarDefaultStyle.mainColor}
         />
         <View style={styles.taskList}>
-          <DayEventsList></DayEventsList>
+          <DayEventsList list={this.state.todayList}></DayEventsList>
         </View>
       </ScrollView>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
@@ -79,15 +79,12 @@ TodayStack.navigationOptions = {
   tabBarLabel: '今日',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
-      size={48}
-      style={{ marginTop: -30, backgroundColor: "#fff" }}
       focused={focused}
       name={Platform.OS === 'ios' ? 'ios-add-circle' : 'md-add-circle'} />
   )
 };
 
 TodayStack.path = '';
-
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
