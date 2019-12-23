@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	ns := beego.NewNamespace("/v1",
+	ns1 := beego.NewNamespace("/v1",
 		beego.NSNamespace("/index",
 			beego.NSRouter("/", &controllers.IndexController{}, "get:GetAll"),
 		),
@@ -31,5 +31,14 @@ func init() {
 			beego.NSRouter("/add", &controllers.AdController{}, "post:Add"),
 		),
 	)
-	beego.AddNamespace(ns)
+	// ns2 := beego.NewNamespace("/",
+	// 	beego.NSNamespace("/",
+	// 		beego.NSRouter("/", &controllers.IndexController{}, "get:Index"),
+	// 	),
+	// )
+
+	beego.Router("/", &controllers.IndexController{}, "get:Index")
+
+	beego.AddNamespace(ns1)
+	// beego.AddNamespace(ns2)
 }

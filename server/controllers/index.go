@@ -7,6 +7,10 @@ type IndexController struct {
 	BaseController
 }
 
+func (this *IndexController) Index() {
+	this.Ctx.WriteString("树懒宝贝欢迎你！")
+}
+
 // @Title GetAll
 // @Description get index
 // @Success 200 {object}
