@@ -11,8 +11,8 @@ import (
 
 func SendSMS(params string) {
 	credential := common.NewCredential(
-		"AKID5q2J3ImC0BJbYTMmpEHURPYXKOLTwxgt",
-		"suUa1bD1xnkklDTq98MqjlPO0hHj4bCs",
+		"",
+		"",
 	)
 	cpf := profile.NewClientProfile()
 	cpf.HttpProfile.Endpoint = "sms.tencentcloudapi.com"
