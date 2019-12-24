@@ -30,6 +30,9 @@ func init() {
 			beego.NSRouter("/", &controllers.AdController{}, "get:GetAll"),
 			beego.NSRouter("/add", &controllers.AdController{}, "post:Add"),
 		),
+		beego.NSNamespace("/sms",
+			beego.NSRouter("/", &controllers.IndexController{}, "get:DailySMS"),
+		),
 	)
 	// ns2 := beego.NewNamespace("/",
 	// 	beego.NSNamespace("/",

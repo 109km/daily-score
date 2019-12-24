@@ -1,6 +1,7 @@
 package main
 
 import (
+	"server/autotask"
 	_ "server/routers"
 
 	"github.com/astaxie/beego"
@@ -26,6 +27,9 @@ func main() {
 	// beego.BConfig.WebConfig.Session.SessionProvider = "redis"
 	// beego.BConfig.WebConfig.Session.SessionProviderConfig = "127.0.0.1:6379"
 
+	go autotask.Start()
+
 	beego.SetStaticPath("/public", "public")
 	beego.Run()
+
 }
