@@ -30,6 +30,6 @@ func StartDailySentence() {
 	// 	}
 	// }
 
-	params := "{\"PhoneNumberSet\":[\"+8618600039173\"],\"TemplateID\":\"506849\",\"Sign\":\"shulanbaobei\",\"TemplateParamSet\":[\"" + dateStr + "\",\"" + tmpStr1 + "\",\"" + tmpStr2 + "\",\"" + pm25Str + "\"],\"SmsSdkAppid\":\"1400298212\"}"
+	params := "{\"PhoneNumberSet\":[\"+8613621253007\",\"+8615701503610\"],\"TemplateID\":\"506849\",\"Sign\":\"shulanbaobei\",\"TemplateParamSet\":[\"" + dateStr + "\",\"" + tmpStr1 + "\",\"" + tmpStr2 + "\",\"" + pm25Str + "\"],\"SmsSdkAppid\":\"1400298212\"}"
 	utils.SendSMS(params)
 }
