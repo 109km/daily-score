@@ -8,7 +8,7 @@ import (
 
 func Start() {
 	c := cron.New()
-	c.AddFunc("08 08 * * *", StartDailySentence)
+	c.AddFunc("CRON_TZ=Asia/Beijing 08 08 * * *", StartDailySentence)
 	fmt.Println("startAutoTasks")
 	c.Start()
 }

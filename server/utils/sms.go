@@ -9,10 +9,21 @@ import (
 	sms "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/sms/v20190711"
 )
 
+type SecretConfig struct {
+	SecretId  string `json:"SecretId"`
+	SecretKey string `json:"SecretKey"`
+}
+
+var qcloudSecretConfig SecretConfig
+
+func init() {
+	qcloudSecretConfig = LoadJSON("conf/qcloud.key")
+}
+
 func SendSMS(params string) {
 	credential := common.NewCredential(
-		"",
-		"",
+		qcloudSecretConfig.SecretId,
+		qcloudSecretConfig.SecretKey,
 	)
 	cpf := profile.NewClientProfile()
 	cpf.HttpProfile.Endpoint = "sms.tencentcloudapi.com"
