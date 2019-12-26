@@ -1,6 +1,7 @@
 {
   "scripts": {
     "start": "bee run",
+    "start-local-demon": "pm2 start ./server --name go-server --log ./logs/output.log",
     "start-demon": "pm2 start ./main --name go-server --log ./logs/output.log",
     "kill": "pm2 delete go-server",
     "deploy": "npm run kill && npm run start-demon",
