@@ -2,13 +2,10 @@ package autotask
 
 import (
 	"server/utils"
-
-	"github.com/astaxie/beego/logs"
 )
 
 func StartDailySentence() {
 
-	logs.Info("StartDailySentence is called.")
 	weatherData := utils.GetWeather() // 获取今日天气信息
 	// sentenceData := utils.GetDailySentence() // 获取每日一句
 
