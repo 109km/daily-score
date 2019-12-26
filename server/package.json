@@ -1,6 +1,9 @@
 {
   "scripts": {
     "start": "bee run",
+    "start-demon": "pm2 start ./main --name go-server --log ./logs/output.log",
+    "kill": "pm2 delete go-server",
+    "deploy": "npm run kill && npm run start-demon",
     "build-centos": "CGO_ENABLED=0 GOOS=linux GOARCH=386 go build main.go",
     "run-in-nohop": "nohup ./main >> ./logs/output.log 2>&1 &"
   }
