@@ -1,8 +1,7 @@
 package utils
 
 import (
-	"fmt"
-
+	"github.com/astaxie/beego/logs"
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common"
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/profile"
@@ -16,32 +15,40 @@ type SecretConfig struct {
 
 var qcloudSecretConfig SecretConfig
 
+var qcloudCPF *profile.ClientProfile
+var qcloudClient *sms.Client
+
 func init() {
 	qcloudSecretConfig = LoadJSON("conf/qcloud.key")
-}
-
-func SendSMS(params string) {
+	qcloudCPF = profile.NewClientProfile()
+	qcloudCPF.HttpProfile.Endpoint = "sms.tencentcloudapi.com"
 	credential := common.NewCredential(
 		qcloudSecretConfig.SecretId,
 		qcloudSecretConfig.SecretKey,
 	)
-	cpf := profile.NewClientProfile()
-	cpf.HttpProfile.Endpoint = "sms.tencentcloudapi.com"
-	client, _ := sms.NewClient(credential, "ap-beijing", cpf)
+	qcloudClient, _ = sms.NewClient(credential, "ap-beijing", qcloudCPF)
+}
+
+func SendSMS(params string) {
 
 	request := sms.NewSendSmsRequest()
-
 	err := request.FromJsonString(params)
 	if err != nil {
 		panic(err)
 	}
-	response, err := client.SendSms(request)
+	response, err := qcloudClient.SendSms(request)
 	if _, ok := err.(*errors.TencentCloudSDKError); ok {
-		fmt.Printf("An API error has returned: %s", err)
+		// fmt.Printf("An API error has returned: %s", err)
+		logs.Error(-1, "TencentCloudSDKError: ", err.Error())
 		return
 	}
 	if err != nil {
+		logs.Error(-1, "utils.SendSMS.error:", err.Error())
 		panic(err)
 	}
-	fmt.Printf("%s", response.ToJsonString())
+	logs.Info("utils.SendSMS.response:", response.ToJsonString())
+}
+
+func GetMessageStatus() {
+
 }
