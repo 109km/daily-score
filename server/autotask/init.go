@@ -9,7 +9,7 @@ var cr *cron.Cron
 
 func Start() {
 	cr = cron.New()
-	cr.AddFunc("CRON_TZ=Asia/Shanghai 00 00 08 * * *", StartDailySentence)
+	cr.AddFunc("00 30 08 * * *", StartDailySentence)
 	logs.Info("Auto tasks are started.")
 	cr.Start()
 }
