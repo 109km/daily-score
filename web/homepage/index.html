@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>首页</title>
+  <link rel="stylesheet" href="//lottery-1254383113.file.myqcloud.com/assets/public.css">
+  <style>
+    body {
+      flex-direction: column;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 1000px;
+      overflow: hidden;
+    }
+
+    #footer {
+      text-align: center;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <iframe id="ifr" src="" frameborder="0"></iframe>
+  <div id="footer"></div>
+  <script src="//lottery-1254383113.file.myqcloud.com/assets/jquery.min.js"></script>
+  <script>
+    (function () {
+
+      var body = $('body');
+      var footer = $('#footer');
+      var ifr = $("#ifr");
+      if (location.host.indexOf("shulan") >= 0) {
+        ifr.attr("src", "http://shulanbaobei.com/sloth/");
+        footer.html("京ICP备17037403号-2");
+      }
+
+      if (location.host.indexOf("axin") >= 0) {
+        ifr.attr("src", "http://www.shulanbaobei.com/axin.html");
+        footer.html("京ICP备17037403号-3");
+      }
+    }())
+  </script>
+</body>
+
+</html>

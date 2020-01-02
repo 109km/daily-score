@@ -3,6 +3,7 @@ package controllers
 import (
 	types "server/types"
 	"server/utils"
+	"strings"
 )
 
 // Operations about Index
@@ -11,7 +12,15 @@ type IndexController struct {
 }
 
 func (this *IndexController) Index() {
-	this.Ctx.WriteString("树懒宝贝欢迎你！")
+
+	tpl := "shulan.tpl"
+	if strings.Contains(this.Ctx.Request.Host, "axin") {
+		tpl = "axin.tpl"
+	}
+	// resp, _ := http.Get(website)
+	// data, _ := ioutil.ReadAll(resp.Body)
+	// this.Ctx.WriteString(string(data))
+	this.TplName = tpl
 }
 
 // @Title GetAll

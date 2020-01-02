@@ -6,6 +6,7 @@ require (
 	github.com/astaxie/beego v1.12.0
 	github.com/go-redis/redis v6.15.6+incompatible
 	github.com/go-sql-driver/mysql v1.4.1
+	github.com/golang/protobuf v1.3.2
 	github.com/gomodule/redigo v2.0.0+incompatible
 	github.com/robfig/cron v1.2.0
 	github.com/robfig/cron/v3 v3.0.0
